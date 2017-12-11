@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<fieldset>	
+		<field name="date" required="true" type="calendar" label="COM_OEVENTS_EDIT_DATE_LABEL" format="%Y-%m-%d" description="COM_OEVENTS_EDIT_DATE_DESC" class="span12" />
+		<field name="title" required="true" type="text" label="COM_OEVENTS_EDIT_TITLE_LABEL" class="span12" />
+		<field name="venue" type="text" label="COM_OEVENTS_EDIT_VENUE_LABEL" class="span12" />
+
+		<field name="level" type="list" label="COM_OEVENTS_EDIT_LEVEL_LABEL" class="span12">
+            <option value=""></option>
+            <option value="National (Lv. A)">A</option>
+            <option value="Regional (Lv. B)">B</option>
+            <option value="Regional (Lv. C)">C</option>
+            <option value="Local (Lv. D)">D</option>
+            <option value="International">International</option>
+        </field>
+
+		<field name="club" type="text" label="COM_OEVENTS_EDIT_CLUB_LABEL" class="span12" />
+
+		<field name="url" required="true" validate="url" type="url" label="COM_OEVENTS_EDIT_URL_LABEL" class="span12" />
+		<field name="clubUrl" validate="url" type="url" label="COM_OEVENTS_EDIT_CLUB_URL_LABEL" class="span12" />
+
+		<field name="event_id" type="hidden" />
+		<field name="status" type="hidden" value="0" />
+	</fieldset>
+</form>

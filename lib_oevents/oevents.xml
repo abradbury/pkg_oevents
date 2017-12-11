@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="library" method="upgrade" version="1.7">
+    <name>OEvents Library</name>
+    <libraryname>oevents</libraryname>
+    <author>abradbury</author>
+    <creationDate>January 2016</creationDate>
+    <authorUrl>http://www.southyorkshireorienteers.org.uk</authorUrl>
+    <version>1.1.0</version>
+    <description>COM_OEVENTS_DESCRIPTION</description>
+
+    <files>
+    	<file>index.html</file>
+        <file>oevents.xml</file>
+        <file>updater.php</file>
+    </files>
+</extension>
