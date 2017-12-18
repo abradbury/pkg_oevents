@@ -4,7 +4,7 @@
     <creationDate>December 2015</creationDate>
     <authorUrl>http://www.southyorkshireorienteers.org.uk</authorUrl>
     <author>abradbury</author>
-    <version>1.1.0</version>
+    <version>1.2.0</version>
     <files>
         <filename>mod_oevents_external.xml</filename>
         <filename module="mod_oevents_external">mod_oevents_external.php</filename>

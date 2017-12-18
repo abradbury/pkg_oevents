@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <config>
-	<fieldset name="greetings" label="COM_OEVENTS_CONFIG_LABEL" description="COM_OEVENTS_CONFIG_DESC">
+	<fieldset name="main" label="COM_OEVENTS_CONFIG_LABEL" description="COM_OEVENTS_CONFIG_DESC">
 		<field name="eventLevel" label="Event levels" type="list" default="4" multiple="true">
-            <option value="1">A</option>
-            <option value="2">B</option>
-            <option value="3">C</option>
-            <option value="4">D</option>
-            <option value="5">International</option>
+            <option value="1">COM_OEVENTS_EVENT_LEVEL_1</option>
+            <option value="2">COM_OEVENTS_EVENT_LEVEL_2</option>
+            <option value="3">COM_OEVENTS_EVENT_LEVEL_3</option>
+            <option value="4">COM_OEVENTS_EVENT_LEVEL_4</option>
+            <option value="5">COM_OEVENTS_EVENT_LEVEL_5</option>
         </field>
 
         <field name="postcode" label="Central postcode" type="text" default="S62 6AE" />

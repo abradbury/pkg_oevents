@@ -20,7 +20,7 @@ zip -r lib_oevents.zip lib_oevents
 
 echo
 echo "Zipping OEvents package..."
-zip -r pkg_oevents.zip *.{xml,zip}
+zip -r pkg_oevents.zip {*.xml,*.zip,language}
 
 echo
 echo "Removing zip artifacts..."

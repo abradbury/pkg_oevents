@@ -83,7 +83,7 @@ class OEventsUpdater {
             CURLOPT_CONNECTTIMEOUT => 120,      // Setting the amount of time (in seconds) before the request times out
             CURLOPT_TIMEOUT => 120,             // Setting the maximum amount of time for cURL to execute queries
             CURLOPT_MAXREDIRS => 10,            // Setting the maximum number of redirections to follow
-            CURLOPT_USERAGENT => "OEventsBot/1.1 (+https://github.com/abradbury, +" . JURI::root() . ")",  // Setting the useragent
+            CURLOPT_USERAGENT => "OEventsBot/1.2.0 (+https://github.com/abradbury, +" . JURI::root() . ")",  // Setting the useragent
             CURLOPT_URL => $url,                // Setting cURL's URL option with the $url variable passed into the function
         );
             
@@ -111,11 +111,11 @@ class OEventsUpdater {
             $query = $db->getQuery(true);
 
             $existingEventIDs = $this->getEventIds($db);
-            $levelMapping = array('A' => 'National (Lv. A)', 
-                                  'B' => 'Regional (Lv. B)', 
-                                  'C' => 'Regional (Lv. C)',
-                                  'D' => 'Local (Lv. D)',
-                                  'International' => 'International');
+            $levelMapping = array('A' => '1', 
+                                  'B' => '2', 
+                                  'C' => '3',
+                                  'D' => '4',
+                                  'International' => '5');
 
             $updateValues = array();
             $insertValues = array();

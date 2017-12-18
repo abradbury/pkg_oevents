@@ -44,14 +44,12 @@ curl --data "quay=$(openssl passwd -1 -salt someRandomSalt someRandomPassword$(d
 ```
 
 ## TODO
- - Module does not make use of component/package language files
  - Add an option to specify own salt and password on install/package
 
 ## Bugs
- - On the installation confirmation page the `COM_OEVENTS_DESCRIPTION` JString is echoed out rather than the actual string
-    - Possibly because the package does not define any language files, its subcomponents do
- - Remove hard-coded event types and column headings, especially from module
-    - Also, update to using new event types
  - Several warning messages are printed to the main OEvents manager page in the administrator section of the site after a clean install. Don't go away when there are events present
     - These are because the event level option default doesn't apply until it is saved by the user...
  - Embed the scheduled refresh into the component rather than requiring an external cron-job to be set-up
+ - Salt replacing during packaging seems to be working, but not password
+ - Module is still not getting access to the sting values
+    - Somehow the language files need to be installed to the root languages directory on install

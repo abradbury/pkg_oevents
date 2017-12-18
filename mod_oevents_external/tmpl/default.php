@@ -5,11 +5,11 @@ defined('_JEXEC') or die; ?>
 <table class="table table-bordered">
 	<thead>
 		<tr>
-			<th>Date</th>
-			<th>Event</th>
-			<th>Venue</th>
-			<th>Level</th>
-			<th>Club</th>
+			<th><?php echo JText::_('COM_OEVENTS_DATE'); ?></th>
+			<th><?php echo JText::_('COM_OEVENTS_EVENT'); ?></th>
+			<th><?php echo JText::_('COM_OEVENTS_VENUE'); ?></th>
+			<th><?php echo JText::_('COM_OEVENTS_LEVEL'); ?></th>
+			<th><?php echo JText::_('COM_OEVENTS_CLUB'); ?></th>
 		</tr>
 	</thead>
 	<tbody>
@@ -18,7 +18,7 @@ defined('_JEXEC') or die; ?>
 			<td><?php echo date("D jS M Y", strtotime($event['date'])); ?></td>
 			<td><a href="<?php echo $event['url']; ?>"><?php echo $event['title']; ?></a></td>
 			<td><?php echo $event['venue']; ?></td>
-			<td><?php echo $event['level']; ?></td>
+			<td><?php echo JText::_("COM_OEVENTS_EVENT_LEVEL_" . $event['level']); ?></td>
 			<td><?php if ($event['clubUrl'] != "") {?>
 				<a href="<?php echo $event['clubUrl']; ?>"><?php echo $event['club']; ?></a>
 				<?php } else { ?>
@@ -28,7 +28,7 @@ defined('_JEXEC') or die; ?>
 		</tr>
 		<?php endforeach; } else { ?>
 		<tr>
-			<td colspan="5">No other events of interest found</td>
+			<td colspan="5"><?php echo JText::_("COM_OEVENTS_NO_EVENTS"); ?></td>
 		</tr>
 		<?php } ?>
 	</tbody>

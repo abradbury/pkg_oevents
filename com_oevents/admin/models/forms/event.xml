@@ -7,11 +7,11 @@
 
 		<field name="level" type="list" label="COM_OEVENTS_EDIT_LEVEL_LABEL" class="span12">
             <option value=""></option>
-            <option value="National (Lv. A)">A</option>
-            <option value="Regional (Lv. B)">B</option>
-            <option value="Regional (Lv. C)">C</option>
-            <option value="Local (Lv. D)">D</option>
-            <option value="International">International</option>
+            <option value="1">COM_OEVENTS_EVENT_LEVEL_1</option>
+            <option value="2">COM_OEVENTS_EVENT_LEVEL_2</option>
+            <option value="3">COM_OEVENTS_EVENT_LEVEL_3</option>
+            <option value="4">COM_OEVENTS_EVENT_LEVEL_4</option>
+            <option value="5">COM_OEVENTS_EVENT_LEVEL_5</option>
         </field>
 
 		<field name="club" type="text" label="COM_OEVENTS_EDIT_CLUB_LABEL" class="span12" />

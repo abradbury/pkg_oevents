@@ -7,12 +7,16 @@
 	<author>abradbury</author>
 	<creationDate>January 2016</creationDate>
 	<packagename>oevents</packagename>
-	<version>1.1.0</version>
+	<version>1.2.0</version>
 	<url>http://www.southyorkshireorienteers.org.uk</url>
-	<description>COM_OEVENTS_DESCRIPTION</description>
+	<description>PKG_OEVENTS_DESCRIPTION</description>
 	<files>
 		<file type="component" id="com_oevents" >com_oevents.zip</file>
 		<file type="module" id="oevents" client="site">mod_oevents_external.zip</file>
 		<file type="library" id="oevents">lib_oevents.zip</file>
 	</files>
+
+	<languages folder="language">
+		<language tag="en-GB">en-GB/en-GB.pkg_oevents.sys.ini</language>
+	</languages>
 </extension>

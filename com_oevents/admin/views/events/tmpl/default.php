@@ -7,10 +7,15 @@
 // No direct access to this file
 defined('_JEXEC') or die('Restricted Access');
 
+function pretty_print_event_level($event_level) {
+	return(JText::_($event_level));
+}
+
 // Stringify the levels
 $array = $this->params->get('eventLevel');
-$last  = array_slice($array, -1);
-$first = join(', ', array_slice($array, 0, -1));
+$prettyArray = array_map("pretty_print_event_level", $array);
+$last  = array_slice($prettyArray, -1);
+$first = join(', ', array_slice($prettyArray, 0, -1));
 $both  = array_filter(array_merge(array($first), $last), 'strlen');
 $stringifiedList = join(' or ', $both); 
 
@@ -19,14 +24,7 @@ $stringifiedList = join(' or ', $both);
 <div class="row-fluid">
 	<div class="span3 well">
 		<h3>Configuration</h3>
-		<p>Showing events within <strong><?php echo $this->params->get('radius'); ?></strong> miles of <strong><?php echo $this->params->get('postcode'); ?></strong> that are of level <strong><?php echo $stringifiedList; ?></strong> where levels are as follows: </p>
-		<ul>
-			<li><strong>1</strong>: National (Lv. A)</li>
-			<li><strong>2</strong>: Regional (Lv. B)</li>
-			<li><strong>3</strong>: Regional (Lv. C)</li>
-			<li><strong>4</strong>: Local (Lv. D)</li>
-			<li><strong>5</strong>: International</li>
-		</ul>
+		<p>Showing events within <strong><?php echo $this->params->get('radius'); ?></strong> miles of <strong><?php echo $this->params->get('postcode'); ?></strong> that are of level <strong><?php echo $stringifiedList; ?></strong>.
 		<p>To configure these options, select the options menu from the toolbar.</p>
 		<p>OEvents is currently scheduled to check for updates <strong>once per day</strong> using a cron job that runs at <strong>3:00am</strong>. To alter the frequency of this, please contact the website administrator.</p>
 	</div>
@@ -59,7 +57,7 @@ $stringifiedList = join(' or ', $both);
 									<td><?php echo $row->date; ?></td>
 									<td><a href="<?php echo $editLink; ?>" title="<?php echo JText::_('COM_OEVENTS_EDIT_EVENT'); ?>"><?php echo $row->title; ?></a></td>
 									<td><?php echo $row->venue; ?></td>
-									<td><?php echo $row->level; ?></td>
+									<td><?php echo JText::_("COM_OEVENTS_EVENT_LEVEL_" . $row->level); ?></td>
 									<td><?php echo $row->club; ?></td>
 									<td><?php if ($row->status == 1) {
 										echo "AUTO";
