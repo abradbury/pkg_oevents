@@ -32,9 +32,9 @@ class OEventsController extends JControllerLegacy {
         if (empty($quay)) {
         	die( JText::_( 'Invalid Token' ) );
         } else {
-        	$quay = "\$1\$qUy4wxXf\$" . $quay;
+        	$quay = "\$1\$oATIsO6NzxngehUs7x3ghdB+\$" . $quay;
 
-	        if (password_verify("dibber2009".$dayOfYear, $quay)) {
+	        if (password_verify("hcZHtA5AwOQWm50bqVDjtYuL".$dayOfYear, $quay)) {
 	        } else {
 	        	die( JText::_( 'Invalid Token' ) );
 	        }

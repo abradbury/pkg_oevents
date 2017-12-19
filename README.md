@@ -45,11 +45,12 @@ curl --data "quay=$(openssl passwd -1 -salt someRandomSalt someRandomPassword$(d
 
 ## TODO
  - Add an option to specify own salt and password on install/package
+ - Make use of `sed` backup to restore original salt & password after package has been created so future package commands still replace these values
+ - Embed the scheduled refresh into the component rather than requiring an external cron-job to be set-up
 
 ## Bugs
  - Several warning messages are printed to the main OEvents manager page in the administrator section of the site after a clean install. Don't go away when there are events present
     - These are because the event level option default doesn't apply until it is saved by the user...
- - Embed the scheduled refresh into the component rather than requiring an external cron-job to be set-up
  - Salt replacing during packaging seems to be working, but not password
- - Module is still not getting access to the sting values
-    - Somehow the language files need to be installed to the root languages directory on install
+ - cURL command is correct, but not being executed...
+ - When events are updated automatically, the level is `COM_OEVENTS_EVENT_LEVEL_`

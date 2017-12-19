@@ -10,7 +10,7 @@
 	<authorUrl>http://www.southyorkshireorienteers.org.uk</authorUrl>
 	<copyright></copyright>
 	<license></license>
-	<version>1.2.0</version>
+	<version>1.2.1</version>
 	<description>COM_OEVENTS_DESCRIPTION</description>
 
 	<install>
@@ -23,7 +23,7 @@
 			<file driver="mysql" charset="utf8">sql/uninstall.mysql.utf8.sql</file>
 		</sql>
 	</uninstall>
-	<update> <!-- Runs on update; New in 2.5 -->
+	<update>
 		<schemas>
 			<schemapath type="mysql">sql/updates/mysql</schemapath>
 		</schemas>
@@ -39,31 +39,34 @@
 		<filename>controller.php</filename>
 	</files>
 
+	<!-- Installs the language files to language (client-side) -->
+	<languages folder="language">
+		<language tag="en-GB" client="site">en-GB/en-GB.com_oevents.ini</language>
+	</languages>
+
 	<administration>
-		<!-- Administration Menu Section -->
 		<menu link='index.php?option=com_oevents'>COM_OEVENTS_MENU</menu>
 		<!-- Administration Main File Copy Section -->
 		<!-- Note the folder attribute: This attribute describes the folder
 				to copy FROM in the package to install therefore files copied
 				in this section are copied from /admin/ in the package -->
 		<files folder="admin">
-			<!-- Admin Main File Copy Section -->
 			<filename>index.html</filename>
 			<filename>config.xml</filename>
 			<filename>oevents.php</filename>
 			<filename>controller.php</filename>
-			<!-- SQL files section -->
 			<folder>sql</folder>
-			<!-- tables files section -->
 			<folder>tables</folder>
-			<!-- models files section -->
 			<folder>models</folder>
-			<!-- views files section -->
 			<folder>views</folder>
-			<folder>language</folder>
-			<!-- controllers files section -->
 			<folder>controllers</folder>
 		</files>
+
+		<!-- Installs the language files to administrator/language -->
+		<languages folder="language">
+			<language tag="en-GB">en-GB/en-GB.com_oevents.ini</language>
+			<language tag="en-GB">en-GB/en-GB.com_oevents.sys.ini</language>
+		</languages>
 	</administration>
 
 </extension>
