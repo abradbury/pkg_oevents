@@ -1,6 +1,7 @@
 <?php
 
 defined( '_JEXEC' ) or die;
+JFactory::getLanguage()->load('com_oevents');
 
 class OEventsUpdater {
 
@@ -83,7 +84,7 @@ class OEventsUpdater {
             CURLOPT_CONNECTTIMEOUT => 120,      // Setting the amount of time (in seconds) before the request times out
             CURLOPT_TIMEOUT => 120,             // Setting the maximum amount of time for cURL to execute queries
             CURLOPT_MAXREDIRS => 10,            // Setting the maximum number of redirections to follow
-            CURLOPT_USERAGENT => "OEventsBot/1.2.1 (+https://github.com/abradbury, +" . JURI::root() . ")",  // Setting the useragent
+            CURLOPT_USERAGENT => "OEventsBot/1.2.2 (+https://github.com/abradbury, +" . JURI::root() . ")",  // Setting the useragent
             CURLOPT_URL => $url,                // Setting cURL's URL option with the $url variable passed into the function
         );
             
@@ -111,11 +112,11 @@ class OEventsUpdater {
             $query = $db->getQuery(true);
 
             $existingEventIDs = $this->getEventIds($db);
-            $levelMapping = array('A' => '1', 
-                                  'B' => '2', 
-                                  'C' => '3',
-                                  'D' => '4',
-                                  'International' => '5');
+            $levelMapping = array(JText::_("COM_OEVENTS_EVENT_LEVEL_1") => '1', 
+                                  JText::_("COM_OEVENTS_EVENT_LEVEL_2") => '2', 
+                                  JText::_("COM_OEVENTS_EVENT_LEVEL_3") => '3',
+                                  JText::_("COM_OEVENTS_EVENT_LEVEL_4") => '4',
+                                  JText::_("COM_OEVENTS_EVENT_LEVEL_5") => '5');
 
             $updateValues = array();
             $insertValues = array();

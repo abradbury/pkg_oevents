@@ -53,4 +53,5 @@ curl --data "quay=$(openssl passwd -1 -salt someRandomSalt someRandomPassword$(d
     - These are because the event level option default doesn't apply until it is saved by the user...
  - Salt replacing during packaging seems to be working, but not password
  - cURL command is correct, but not being executed...
- - When events are updated automatically, the level is `COM_OEVENTS_EVENT_LEVEL_`
+ - Count of events found seems to be incorrect, higher than actual, perhaps a date limiting issue?
+ 
