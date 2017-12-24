@@ -40,7 +40,7 @@ As part of the install/package script (`create_install_package.sh`), the default
 For additional security the day of the year is appended to the generated password. The cURL command should also do this so it is aligned with what the code is expecting. All in all, an example of the cURL command to be used can be found below: 
 
 ```bash
-curl --data "quay=$(openssl passwd -1 -salt someRandomSalt someRandomPassword$(date '+%-j') | cut -d '$' -f 4)" "https://www.example.com/?option=com_oevents&task=refresh" >/dev/null 2>&1
+curl --data "quay=$(openssl passwd -1 -salt someRandomSalt someRandomPassword$(date '+\%-j') | cut -d '$' -f 4)" "https://www.example.com/?option=com_oevents&task=refresh" >/dev/null 2>&1
 ```
 
 ## TODO
