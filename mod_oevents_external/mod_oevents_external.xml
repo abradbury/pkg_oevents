@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <extension type="module" version="3.4" client="site" method="upgrade">
-    <name>OEvents External</name>
-    <creationDate>December 2015</creationDate>
-    <authorUrl>http://www.southyorkshireorienteers.org.uk</authorUrl>
-    <author>abradbury</author>
-    <version>1.2.2</version>
-    <files>
-        <filename>mod_oevents_external.xml</filename>
-        <filename module="mod_oevents_external">mod_oevents_external.php</filename>
-        <filename>index.html</filename>
-        <filename>helper.php</filename>
-        <filename>tmpl/default.php</filename>
-        <filename>tmpl/index.html</filename>
-    </files>
+	<name>OEvents External</name>
+	<creationDate>December 2015</creationDate>
+	<authorUrl>http://www.southyorkshireorienteers.org.uk</authorUrl>
+	<author>abradbury</author>
+	<version>1.2.4</version>
+	<files>
+		<filename>mod_oevents_external.xml</filename>
+		<filename module="mod_oevents_external">mod_oevents_external.php</filename>
+		<filename>index.html</filename>
+		<filename>helper.php</filename>
+		<filename>tmpl/default.php</filename>
+		<filename>tmpl/index.html</filename>
+	</files>
 </extension>

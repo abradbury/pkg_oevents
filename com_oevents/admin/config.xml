@@ -2,21 +2,21 @@
 <config>
 	<fieldset name="main" label="COM_OEVENTS_CONFIG_LABEL" description="COM_OEVENTS_CONFIG_DESC">
 		<field name="eventLevel" label="Event levels" type="list" default="4" multiple="true">
-            <option value="1">COM_OEVENTS_EVENT_LEVEL_1</option>
-            <option value="2">COM_OEVENTS_EVENT_LEVEL_2</option>
-            <option value="3">COM_OEVENTS_EVENT_LEVEL_3</option>
-            <option value="4">COM_OEVENTS_EVENT_LEVEL_4</option>
-            <option value="5">COM_OEVENTS_EVENT_LEVEL_5</option>
-        </field>
+			<option value="1">COM_OEVENTS_EVENT_LEVEL_1</option>
+			<option value="2">COM_OEVENTS_EVENT_LEVEL_2</option>
+			<option value="3">COM_OEVENTS_EVENT_LEVEL_3</option>
+			<option value="4">COM_OEVENTS_EVENT_LEVEL_4</option>
+			<option value="5">COM_OEVENTS_EVENT_LEVEL_5</option>
+		</field>
 
-        <field name="postcode" label="Central postcode" type="text" default="S62 6AE" />
+		<field name="postcode" label="Central postcode" type="text" default="S62 6AE" />
 
-        <field name="radius" label="Search radius (miles)" type="number" default="30" min="1" max="500" step="1" />
-        
-        <field name="lookAhead" label="Look ahead (months)" type="number" default="6" min="1" max="24" step="1" description="Number of months to look ahead for events" />
+		<field name="radius" label="Search radius (miles)" type="number" default="30" min="1" max="500" step="1" />
+		
+		<field name="lookAhead" label="Look ahead (months)" type="number" default="6" min="1" max="24" step="1" description="Number of months to look ahead for events" />
 
-        <field name="eventNameLimit" label="Max event name length (characters)" type="number" default="42" min="5" max="99" step="1" description="The number of characters to limit the event name to" />
+		<field name="eventNameLimit" label="Max event name length (characters)" type="number" default="42" min="5" max="99" step="1" description="The number of characters to limit the event name to" />
 
-        <field name='excludedClub' label='Excluded Club' type='text' description='Note that only 1 club is currently supported' default='SYO' />
+		<field name='excludedClub' label='Excluded Club' type='text' description='Note that only 1 club is currently supported' default='SYO' />
 	</fieldset>
 </config>

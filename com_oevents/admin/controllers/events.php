@@ -61,8 +61,8 @@ class OEventsControllerEvents extends JControllerAdmin {
 	}
 
 	public function refresh() {
-        $updater = new OEventsUpdater();
-        $updaterResponse = $updater->refresh();
+		$updater = new OEventsUpdater();
+		$updaterResponse = $updater->refresh();
 
 		$numberOfNewEvents = $updaterResponse['count'];
 		$updaterStatus = $updaterResponse['status'];
@@ -73,8 +73,8 @@ class OEventsControllerEvents extends JControllerAdmin {
 			JFactory::getApplication()->enqueueMessage("Error finding events: " . $updaterStatus, 'warning');
 		}
 
-        // Refresh page with message
-        $this->setRedirect('index.php?option='.JRequest::getVar('option'));
+		// Refresh page with message
+		$this->setRedirect('index.php?option='.JRequest::getVar('option'));
 	}
 
 }

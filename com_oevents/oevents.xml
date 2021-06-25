@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <extension type="component"
-           version="3.4"
-           method="upgrade">
+		   version="3.4"
+		   method="upgrade">
 
 	<name>OEvents</name>
 	<creationDate>December 2015</creationDate>
@@ -10,7 +10,7 @@
 	<authorUrl>http://www.southyorkshireorienteers.org.uk</authorUrl>
 	<copyright></copyright>
 	<license></license>
-	<version>1.2.2</version>
+	<version>1.2.4</version>
 	<description>COM_OEVENTS_DESCRIPTION</description>
 
 	<install>

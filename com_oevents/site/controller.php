@@ -17,7 +17,7 @@ class OEventsController extends JControllerLegacy {
 	public function refresh() {
 		$this->securityCheck();
 
-        $updater = new OEventsUpdater();
+		$updater = new OEventsUpdater();
 		$updaterResponse = $updater->refresh();
 
 		$this->setRedirect(JRoute::_(JURI::base()));
@@ -25,23 +25,23 @@ class OEventsController extends JControllerLegacy {
 
 	private function securityCheck() {
 		$app = JFactory::getApplication();
-        $postData = $app->input->post;
-        $quay = $postData->get('quay', '', 'RAW');
-       	$dayOfYear = date('z') + 1;
+		$postData = $app->input->post;
+		$quay = $postData->get('quay', '', 'RAW');
+	   	$dayOfYear = date('z') + 1;
 
-        if (empty($quay)) {
-        	die( JText::_( 'Invalid Token' ) );
-        } else {
-        	$quay = "\$1\$oATIsO6NzxngehUs7x3ghdB+\$" . $quay;
+		if (empty($quay)) {
+			die( JText::_( 'Invalid Token' ) );
+		} else {
+			$quay = "\$1\$oATIsO6NzxngehUs7x3ghdB+\$" . $quay;
 
-	        if (password_verify("hcZHtA5AwOQWm50bqVDjtYuL".$dayOfYear, $quay)) {
-	        } else {
-	        	die( JText::_( 'Invalid Token' ) );
-	        }
-        }
+			if (password_verify("jatBpOLiq7x+v3cfSuNCEmzF".$dayOfYear, $quay)) {
+			} else {
+				die( JText::_( 'Invalid Token' ) );
+			}
+		}
 
-        $postData->set(JSession::getFormToken(), '=1');
-        $app->input->post = $postData;
+		$postData->set(JSession::getFormToken(), '=1');
+		$app->input->post = $postData;
 	}
 
 }
