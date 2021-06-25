@@ -19,7 +19,7 @@ class OEventsUpdater {
         $newEventsCount = 0;
         if (empty($curlErrorMsg)) {
             // Scraping downloaded data in $scraped_page for content
-            $results_page = $this->scrape_between($scraped_page, "<div class=\"event_list m-t\">", "<script>"); 
+            $results_page = $this->scrape_between($scraped_page, "<div class=\"event_list m-t", "<div class=\"text-center");
             $separate_results = preg_split("/(<div class=\"event_item\">|<div class=\"event_item event_item_alt\">)/", $results_page );
 
             // Skip the first element as this isn't an event, due to regex issue
