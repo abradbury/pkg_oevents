@@ -33,11 +33,11 @@ class ModOEventsExternalHelper {
 		$eventNameLimit = (int)JComponentHelper::getParams('com_oevents')->get('eventNameLimit');
 
 		for ($i=0; $i < sizeof($result); $i++) { 
-			$fulltitle = htmlspecialchars($result[$i]['title'], ENT_COMPAT, 'UTF-8');
-			if (mb_strlen($fulltitle) > $eventNameLimit) {
-				$title = mb_substr($fulltitle, 0, $eventNameLimit) . '...';
+			$fullTitle = htmlspecialchars($result[$i]['title'], ENT_COMPAT, 'UTF-8');
+			if (mb_strlen($fullTitle) > $eventNameLimit) {
+				$title = mb_substr($fullTitle, 0, $eventNameLimit) . '...';
 			} else {
-				$title = $fulltitle;
+				$title = $fullTitle;
 			}
 
 			$result[$i]['title'] = $title;

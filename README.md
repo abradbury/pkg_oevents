@@ -6,12 +6,16 @@ This component is not intended as a full-on event management system, there are o
 
 ## Installation
 1) Clone this repository
-2) Run the `create_install_package.sh` script to create the following zip files: `com_ovents.zip`, `lib_oevents.zip`, `mod_oevents_external.zip` and `pkg_oevents.zip`
-3) Make a note of the generated token details
+2) Run the `create_install_package.sh` script to create the following zip files: 
+    * `com_ovents.zip`
+    * `lib_oevents.zip`
+    * `mod_oevents_external.zip`
+    * `pkg_oevents.zip`
+3) Make a note of the generated token details that are printed to the console
 4) Install using Joomla 
     1) Extensions -> Manage -> Install
     2) Upload package file and point to the `pkg_oevents` file 
-5) Schedule cron-job to automated the refresh of matching events (details below)
+5) Schedule cron-job to automated the refresh of matching events (details [below](#automated-refresh))
 
 ## Usage
 
@@ -52,6 +56,5 @@ curl --data "quay=$(openssl passwd -1 -salt someRandomSalt someRandomPassword$(d
  - Several warning messages are printed to the main OEvents manager page in the administrator section of the site after a clean install. Don't go away when there are events present
     - These are because the event level option default doesn't apply until it is saved by the user...
  - Salt replacing during packaging seems to be working, but not password
- - cURL command is correct, but not being executed...
- - Count of events found seems to be incorrect, higher than actual, perhaps a date limiting issue?
+ - Count of events found seems to be incorrect (e.g. when refreshing from the admin screen), higher than actual, perhaps a date limiting issue?
  
