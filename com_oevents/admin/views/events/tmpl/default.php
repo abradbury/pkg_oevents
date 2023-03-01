@@ -8,12 +8,22 @@
 defined('_JEXEC') or die('Restricted Access');
 
 function pretty_print_event_level($event_level) {
-	return(JText::_($event_level));
+	// Not great that this mapping has to be in the function..
+	$levelMapping = [
+		'1' => 'COM_OEVENTS_EVENT_LEVEL_1', 
+		'2' => 'COM_OEVENTS_EVENT_LEVEL_2', 
+		'3' => 'COM_OEVENTS_EVENT_LEVEL_3', 
+		'4' => 'COM_OEVENTS_EVENT_LEVEL_4', 
+		'5' => 'COM_OEVENTS_EVENT_LEVEL_5'
+	];
+
+	return(JText::_($levelMapping[$event_level]));
 }
 
 // Stringify the levels
 $array = $this->params->get('eventLevel');
 $prettyArray = array_map("pretty_print_event_level", $array);
+
 $last  = array_slice($prettyArray, -1);
 $first = join(', ', array_slice($prettyArray, 0, -1));
 $both  = array_filter(array_merge([$first], $last), 'strlen');
@@ -26,7 +36,7 @@ $stringifiedList = join(' or ', $both);
 		<h3>Configuration</h3>
 		<p>Showing events within <strong><?php echo $this->params->get('radius'); ?></strong> miles of <strong><?php echo $this->params->get('postcode'); ?></strong> that are of level <strong><?php echo $stringifiedList; ?></strong>.
 		<p>To configure these options, select the options menu from the toolbar.</p>
-		<p>OEvents is currently scheduled to check for updates <strong>once per day</strong> using a cron job that runs at <strong>3:00am</strong>. To alter the frequency of this, please contact the website administrator.</p>
+		<p>OEvents checks for new or updated events periodically as defined by the website administrator when the component was set up.</p>
 	</div>
 	<div class="span9">
 		<h1>OEvents</h1>
