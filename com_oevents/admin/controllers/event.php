@@ -26,7 +26,7 @@ class OEventsControllerEvent extends JControllerForm {
 	 *
 	 * @since   1.6
 	 */
-	public function getModel($name = 'Event', $prefix = 'OEventsModel', $config = array('ignore_request' => true)) {
+	public function getModel($name = 'Event', $prefix = 'OEventsModel', $config = ['ignore_request' => true]) {
 		$model = parent::getModel($name, $prefix, $config);
  
 		return $model;

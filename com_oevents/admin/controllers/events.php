@@ -25,7 +25,7 @@ class OEventsControllerEvents extends JControllerAdmin {
 	 *
 	 * @since   1.6
 	 */
-	public function getModel($name = 'Events', $prefix = 'OEventsModel', $config = array('ignore_request' => true)) {
+	public function getModel($name = 'Events', $prefix = 'OEventsModel', $config = ['ignore_request' => true]) {
 		$model = parent::getModel($name, $prefix, $config);
  
 		return $model;
@@ -38,7 +38,7 @@ class OEventsControllerEvents extends JControllerAdmin {
 
 	public function delete() {
 		JRequest::checkToken() or die( JText::_( 'Invalid Token' ) );
-		$ids = JRequest::getVar('cid', array(), '', 'array');
+		$ids = JRequest::getVar('cid', [], '', 'array');
 
 		if (empty($ids)) {
 			JError::raiseWarning(500, JText::_('JERROR_NO_ITEMS_SELECTED'));

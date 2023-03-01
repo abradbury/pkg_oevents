@@ -35,9 +35,9 @@ class OEventsController extends JControllerLegacy {
 			// The salt and password placeholders below will be replaced with generated 
 			// values when the create_and_install_package.sh script is run. See the 
 			// project's README file for more information.
-			$quay = "\$1\$SALT_PLACEHOLDER\$" . $quay;
+			$quay = "\$1\$Mao0YZIRtNHnfUHGCmni3Mtg\$" . $quay;
 
-			if (!password_verify("PASSWORD_PLACEHOLDER".$dayOfYear, $quay)) {
+			if (!password_verify("ObnbMf8yojoio04jkwKcG1Rd".$dayOfYear, $quay)) {
 				die( JText::_( 'Invalid Token' ) );
 			}
 		}

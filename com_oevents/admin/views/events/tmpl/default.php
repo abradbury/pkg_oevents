@@ -16,7 +16,7 @@ $array = $this->params->get('eventLevel');
 $prettyArray = array_map("pretty_print_event_level", $array);
 $last  = array_slice($prettyArray, -1);
 $first = join(', ', array_slice($prettyArray, 0, -1));
-$both  = array_filter(array_merge(array($first), $last), 'strlen');
+$both  = array_filter(array_merge([$first], $last), 'strlen');
 $stringifiedList = join(' or ', $both); 
 
 ?>

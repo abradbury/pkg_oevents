@@ -23,7 +23,7 @@ class OEventsModelEvent extends JModelAdmin {
 	 *
 	 * @since   1.6
 	 */
-	public function getTable($type = 'OEvents', $prefix = 'OEventsTable', $config = array()) {
+	public function getTable($type = 'OEvents', $prefix = 'OEventsTable', $config = []) {
 		return JTable::getInstance($type, $prefix, $config);
 	}
  
@@ -37,15 +37,15 @@ class OEventsModelEvent extends JModelAdmin {
 	 *
 	 * @since   1.6
 	 */
-	public function getForm($data = array(), $loadData = true) {
+	public function getForm($data = [], $loadData = true) {
 		// Get the form.
 		$form = $this->loadForm(
 			'com_oevents.event',
 			'event',
-			array(
-				'control' => 'jform',
+			[
+				'control' => 'jform', 
 				'load_data' => $loadData
-			)
+			]
 		);
  
 		if (empty($form)) {
@@ -66,7 +66,7 @@ class OEventsModelEvent extends JModelAdmin {
 		// Check the session for previously entered form data.
 		$data = JFactory::getApplication()->getUserState(
 			'com_oevents.edit.event.data',
-			array()
+			[]
 		);
  
 		if (empty($data)) {

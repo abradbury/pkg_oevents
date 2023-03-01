@@ -25,7 +25,7 @@ class OEventsViewEvent extends JViewLegacy {
 		$this->item = $this->get('Item');
  
 		// Check for errors.
-		if (count($errors = $this->get('Errors'))) {
+		if (is_countable($errors = $this->get('Errors')) ? count($errors = $this->get('Errors')) : 0) {
 			JError::raiseError(500, implode('<br />', $errors));
 			return false;
 		}

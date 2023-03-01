@@ -19,7 +19,7 @@ class ModOEventsExternalHelper {
 					->where('date BETWEEN DATE(NOW()) and ' . $db->quote($datePlus))
 					->order('date ASC');
 
-		$result = array();
+		$result = [];
 
 		try {
 			$db->setQuery($query);

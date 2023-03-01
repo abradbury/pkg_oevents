@@ -9,7 +9,7 @@ class OEventsUpdater {
 		JSession::checkToken() or die( JText::_( 'Invalid Token' ) );
 		
 		$this->params = JComponentHelper::getParams('com_oevents');
-		$eventLevel = http_build_query(array('evt_level' => $this->params->get('eventLevel')));
+		$eventLevel = http_build_query(['evt_level' => $this->params->get('eventLevel')]);
 		
 		$url = "https://www.britishorienteering.org.uk/index.php?pg=event&evt_postcode=" . urlencode($this->params->get('postcode')) . "&radius=" . $this->params->get('radius') . "&" . $eventLevel . "&bFilter=Filter";
 		$curlResponse = $this->curl($url);
@@ -43,11 +43,12 @@ class OEventsUpdater {
 			$newEventsCount = count($results);
 		} 
 		
-		return array('status' => $curlErrorMsg, 'count' => $newEventsCount);
+		return ['status' => $curlErrorMsg, 'count' => $newEventsCount];
 	}
 
 	private function parseResult($separate_result) {
-		$result['title'] = $this->scrape_between($separate_result, "<div class=\"event_field evt_name\">", "</div>");
+		$result = [];
+  		$result['title'] = $this->scrape_between($separate_result, "<div class=\"event_field evt_name\">", "</div>");
 		$result['date'] = $this->scrape_between($separate_result, "<div class=\"event_field evt_date\">", "</div>");
 		$result['remote_id'] = (int) $this->scrape_between($separate_result, "<div class=\"event_tab_body\" id=\"event_tab_body_", "\"></div>");
 
@@ -77,16 +78,16 @@ class OEventsUpdater {
 	// Defining the basic cURL function
 	private function curl($url) {
 		// Assigning cURL options to an array
-		$options = Array(
+		$options = [
 			CURLOPT_RETURNTRANSFER => TRUE,     // Setting cURL's option to return the webpage data
 			CURLOPT_FOLLOWLOCATION => TRUE,     // Setting cURL to follow 'location' HTTP headers
 			CURLOPT_AUTOREFERER => TRUE,        // Automatically set the referer where following 'location' HTTP headers
 			CURLOPT_CONNECTTIMEOUT => 120,      // Setting the amount of time (in seconds) before the request times out
 			CURLOPT_TIMEOUT => 120,             // Setting the maximum amount of time for cURL to execute queries
 			CURLOPT_MAXREDIRS => 10,            // Setting the maximum number of redirections to follow
-			CURLOPT_USERAGENT => "OEventsBot/1.2.6 (+https://github.com/abradbury, +" . JURI::root() . ")",  // Setting the useragent
+			CURLOPT_USERAGENT => "OEventsBot/1.2.7 (+https://github.com/abradbury, +" . JURI::root() . ")",  // Setting the useragent
 			CURLOPT_URL => $url,                // Setting cURL's URL option with the $url variable passed into the function
-		);
+  		];
 			
 		$ch = curl_init($url);                  // Initialising cURL 
 		curl_setopt_array($ch, $options);       // Setting cURL's options using the previously assigned array data in $options
@@ -94,32 +95,34 @@ class OEventsUpdater {
 		$status = curl_error($ch);              // Get error message, if any
 		curl_close($ch);                        // Closing cURL        
 		
-		return array('status' => $status, 'data' => $data);
+		return ['status' => $status, 'data' => $data];
 	}
 
 	// Defining the basic scraping function
 	private function scrape_between($data, $start, $end) {
-		$data = stristr($data, $start);         // Stripping all data from before $start
-		$data = substr($data, strlen($start));  // Stripping $start
-		$stop = stripos($data, $end);           // Getting the position of the $end of the data to scrape
-		$data = substr($data, 0, $stop);        // Stripping all data from after and including the $end of the data to scrape
-		return $data;                           // Returning the scraped data from the function
+		$data = stristr($data, (string) $start);    // Stripping all data from before $start
+		$data = substr($data, strlen($start));  	// Stripping $start
+		$stop = stripos($data, (string) $end);      // Getting the position of the $end of the data to scrape
+		$data = substr($data, 0, $stop);        	// Stripping all data from after and including the $end of the data to scrape
+		return $data;                           	// Returning the scraped data from the function
 	}
 
 	private function insertExternalEvents($events) {
-		if (count($events) > 0) {
+		if ((is_countable($events) ? count($events) : 0) > 0) {
 			$db = JFactory::getDbo();
 			$query = $db->getQuery(true);
 
 			$existingEventIDs = $this->getEventIds($db);
-			$levelMapping = array(JText::_("COM_OEVENTS_EVENT_LEVEL_1") => '1', 
-								  JText::_("COM_OEVENTS_EVENT_LEVEL_2") => '2', 
-								  JText::_("COM_OEVENTS_EVENT_LEVEL_3") => '3',
-								  JText::_("COM_OEVENTS_EVENT_LEVEL_4") => '4',
-								  JText::_("COM_OEVENTS_EVENT_LEVEL_5") => '5');
+			$levelMapping = [
+				JText::_("COM_OEVENTS_EVENT_LEVEL_1") => '1', 
+				JText::_("COM_OEVENTS_EVENT_LEVEL_2") => '2', 
+				JText::_("COM_OEVENTS_EVENT_LEVEL_3") => '3', 
+				JText::_("COM_OEVENTS_EVENT_LEVEL_4") => '4', 
+				JText::_("COM_OEVENTS_EVENT_LEVEL_5") => '5'
+			];
 
-			$updateValues = array();
-			$insertValues = array();
+			$updateValues = [];
+			$insertValues = [];
 			foreach ($events as $event) {
 				$dateTime = DateTime::createFromFormat('D jS M Y', $event['date'])->format("Y-m-d H:i:s");
 				
