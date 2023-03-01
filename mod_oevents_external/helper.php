@@ -25,6 +25,9 @@ class ModOEventsExternalHelper {
 			$db->setQuery($query);
 			$result = $db->loadAssocList();
 		} catch (RuntimeException $e) {
+			// FIXME: Running rector with UP_TO_PHP_80 removes the unused variable here, but it causes a runtime error
+			// https://github.com/rectorphp/rector/blob/main/docs/rector_rules_overview.md#removeunusedvariableincatchrector
+
 			// TODO: Debug log error message so user's can't see
 			// JFactory::getApplication()->enqueueMessage("Error reading from database for external events", 'message');
 		}
@@ -33,7 +36,7 @@ class ModOEventsExternalHelper {
 		$eventNameLimit = (int)JComponentHelper::getParams('com_oevents')->get('eventNameLimit');
 
 		for ($i=0; $i < sizeof($result); $i++) { 
-			$fullTitle = htmlspecialchars($result[$i]['title'], ENT_COMPAT, 'UTF-8');
+			$fullTitle = htmlspecialchars((string) $result[$i]['title'], ENT_COMPAT, 'UTF-8');
 			if (mb_strlen($fullTitle) > $eventNameLimit) {
 				$title = mb_substr($fullTitle, 0, $eventNameLimit) . '...';
 			} else {
