@@ -22,7 +22,8 @@ function pretty_print_event_level($event_level) {
 
 // Stringify the levels
 $array = $this->params->get('eventLevel');
-$prettyArray = array_map("pretty_print_event_level", $array);
+// FIXME: Array can be null on initial installations
+$prettyArray = array_map('pretty_print_event_level', $array);
 
 $last  = array_slice($prettyArray, -1);
 $first = join(', ', array_slice($prettyArray, 0, -1));

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <form>
 	<fieldset>	
-		<field name="date" required="true" type="calendar" label="COM_OEVENTS_EDIT_DATE_LABEL" format="%Y-%m-%d" description="COM_OEVENTS_EDIT_DATE_DESC" class="span12" />
+		<field name="date" required="true" type="calendar" label="COM_OEVENTS_EDIT_DATE_LABEL" format="%Y-%m-%d" filterformat="Y-m-d" description="COM_OEVENTS_EDIT_DATE_DESC" class="span12" />
 		<field name="title" required="true" type="text" label="COM_OEVENTS_EDIT_TITLE_LABEL" class="span12" />
 		<field name="venue" type="text" label="COM_OEVENTS_EDIT_VENUE_LABEL" class="span12" />
 

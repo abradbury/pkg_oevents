@@ -37,11 +37,11 @@ class OEventsControllerEvents extends JControllerAdmin {
 	}
 
 	public function delete() {
-		JRequest::checkToken() or die( JText::_( 'Invalid Token' ) );
-		$ids = JRequest::getVar('cid', [], '', 'array');
+		// JRequest::checkToken() or die( JText::_( 'Invalid Token' ) );
+		$ids = JFactory::getApplication()->input->post->get('cid');
 
 		if (empty($ids)) {
-			JError::raiseWarning(500, JText::_('JERROR_NO_ITEMS_SELECTED'));
+			throw new \Exception(JText::_('JERROR_NO_ITEMS_SELECTED'), 500);
 		} else {
 			$model = $this->getModel();
 			$result = $model->deleteEvents($ids);
@@ -57,7 +57,7 @@ class OEventsControllerEvents extends JControllerAdmin {
 				JFactory::getApplication()->enqueueMessage('Error deleting event', 'error');
 			}
 		}
-		$this->setRedirect('index.php?option='.JRequest::getVar('option'));
+		$this->setRedirect('index.php?option='.JFactory::getApplication()->input->get->get('option'));
 	}
 
 	public function refresh() {
@@ -74,7 +74,7 @@ class OEventsControllerEvents extends JControllerAdmin {
 		}
 
 		// Refresh page with message
-		$this->setRedirect('index.php?option='.JRequest::getVar('option'));
+		$this->setRedirect('index.php?option='.JFactory::getApplication()->input->get->get('option'));
 	}
 
 }
