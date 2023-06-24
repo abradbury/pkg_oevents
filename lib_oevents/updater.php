@@ -10,8 +10,15 @@ class OEventsUpdater {
 		
 		$this->params = JComponentHelper::getParams('com_oevents');
 		$eventLevel = http_build_query(['evt_level' => $this->params->get('eventLevel')]);
+
+		$until = new DateTime('now +'.$this->params->get('lookAhead').' months');
+		$untilDay = $until->format('j');
+		$untilMonth = $until->format('n');
+		$untilYear = $until->format('Y');
+		$filterEnd = $until->format('d%2\Fm%2\FY');
+		$dateFilter = '&filter_end='.$filterEnd.'&filter_end_year='.$untilYear.'&filter_end_month='.$untilMonth.'&filter_end_day='.$untilDay;
 		
-		$url = "https://www.britishorienteering.org.uk/index.php?pg=event&evt_postcode=" . urlencode($this->params->get('postcode')) . "&radius=" . $this->params->get('radius') . "&" . $eventLevel . "&bFilter=Filter";
+		$url = 'https://www.britishorienteering.org.uk/index.php?pg=event&evt_postcode=' . urlencode($this->params->get('postcode')) . '&radius=' . $this->params->get('radius') . '&' . $eventLevel . '&bFilter=Filter' . $dateFilter;
 		$curlResponse = $this->curl($url);
 		$curlErrorMsg = $curlResponse['status'];
 		$scraped_page = $curlResponse['data'];
@@ -68,8 +75,8 @@ class OEventsUpdater {
 			$result['club'] = '';
 		}
 
-		$result['level'] = str_replace("Level ", '', $this->scrape_between($separate_result, "<div class=\"event_field evt_level\"><label>Level:</label>", "</div>"));
-		$urlTemp = explode(",", $this->scrape_between($separate_result, "<input type=\"hidden\" name=\"event_ids\" id=\"event_ids\" value=\"", "\" />"));
+		$result['level'] = str_replace('Level ', '', $this->scrape_between($separate_result, "<div class=\"event_field evt_level\"><label>Level:</label>", "</div>"));
+		$urlTemp = explode(',', $this->scrape_between($separate_result, "<input type=\"hidden\" name=\"event_ids\" id=\"event_ids\" value=\"", "\" />"));
 		$result['url'] = "https://www.britishorienteering.org.uk/index.php?pg=event&event=" . array_pop($urlTemp);
 
 		return $result;
