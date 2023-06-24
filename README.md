@@ -4,6 +4,10 @@ A simple Joomla package that periodically crawls the [British Orienteering event
 
 This component is not intended as a full-on event management system, there are other Joomla components that manage this, such as [JEM](https://www.joomlaeventmanager.net). 
 
+## Requirements
+* Joomla 4.2+
+* PHP 8.2+
+
 ## Installation
 1) Clone this repository
 2) Run the `create_install_package.sh` script to create the following zip files: 
