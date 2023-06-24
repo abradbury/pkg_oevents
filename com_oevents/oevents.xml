@@ -34,7 +34,6 @@
 			to copy FROM in the package to install therefore files copied
 			in this section are copied from /site/ in the package -->
 	<files folder="site">
-		<filename>index.html</filename>
 		<filename>oevents.php</filename>
 		<filename>controller.php</filename>
 	</files>
@@ -51,7 +50,6 @@
 				to copy FROM in the package to install therefore files copied
 				in this section are copied from /admin/ in the package -->
 		<files folder="admin">
-			<filename>index.html</filename>
 			<filename>config.xml</filename>
 			<filename>oevents.php</filename>
 			<filename>controller.php</filename>
