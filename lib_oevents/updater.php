@@ -92,7 +92,7 @@ class OEventsUpdater {
 			CURLOPT_CONNECTTIMEOUT => 120,      // Setting the amount of time (in seconds) before the request times out
 			CURLOPT_TIMEOUT => 120,             // Setting the maximum amount of time for cURL to execute queries
 			CURLOPT_MAXREDIRS => 10,            // Setting the maximum number of redirections to follow
-			CURLOPT_USERAGENT => "OEventsBot/1.2.10 (+https://github.com/abradbury, +" . JURI::root() . ")",  // Setting the useragent
+			CURLOPT_USERAGENT => 'OEventsBot/1.3.0 (+https://github.com/abradbury, +' . JURI::root() . ')',  // Setting the useragent
 			CURLOPT_URL => $url,                // Setting cURL's URL option with the $url variable passed into the function
   		];
 			
