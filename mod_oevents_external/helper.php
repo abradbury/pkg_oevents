@@ -10,7 +10,7 @@ class ModOEventsExternalHelper {
 		if ($lookAheadMonths <= 0) {
 			$lookAheadMonths = 1;
 		}
-		$datePlus = date('Y-m-d', strtotime("+" . $lookAheadMonths . " months", strtotime(date('Y-m-d'))));
+		$datePlus = date('Y-m-d', strtotime('+' . $lookAheadMonths . ' months', strtotime(date('Y-m-d'))));
 
 		$db = JFactory::getDbo();
 		$query = $db->getQuery(true)
@@ -29,7 +29,7 @@ class ModOEventsExternalHelper {
 			// https://github.com/rectorphp/rector/blob/main/docs/rector_rules_overview.md#removeunusedvariableincatchrector
 
 			// TODO: Debug log error message so user's can't see
-			// JFactory::getApplication()->enqueueMessage("Error reading from database for external events", 'message');
+			// JFactory::getApplication()->enqueueMessage('Error reading from database for external events', 'message');
 		}
 
 		// Limit the event name length

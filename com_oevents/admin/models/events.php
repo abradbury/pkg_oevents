@@ -30,7 +30,7 @@ class OEventsModelEvents extends JModelList {
 		if ($lookAheadMonths <= 0) {
 			$lookAheadMonths = 1;
 		}
-		$datePlus = date('Y-m-d', strtotime("+" . $lookAheadMonths . " months", strtotime(date('Y-m-d'))));
+		$datePlus = date('Y-m-d', strtotime('+' . $lookAheadMonths . ' months', strtotime(date('Y-m-d'))));
 
 		// Create the base select statement.
 		$query->select('*')

@@ -68,9 +68,9 @@ class OEventsControllerEvents extends JControllerAdmin {
 		$updaterStatus = $updaterResponse['status'];
 		
 		if (empty($updaterStatus)) {
-			JFactory::getApplication()->enqueueMessage($numberOfNewEvents . " events found", 'message');
+			JFactory::getApplication()->enqueueMessage($numberOfNewEvents . ' events found', 'message');
 		} else {
-			JFactory::getApplication()->enqueueMessage("Error finding events: " . $updaterStatus, 'warning');
+			JFactory::getApplication()->enqueueMessage('Error finding events: ' . $updaterStatus, 'warning');
 		}
 
 		// Refresh page with message
