@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="plugin" group="task" method="upgrade">
+	<name>plg_task_oevents_updater</name>
+	<author>abradbury</author>
+	<creationDate>September 2023</creationDate>
+	<authorUrl>https://www.southyorkshireorienteers.org.uk</authorUrl>
+	<version>1.0.0</version>
+	<description>PLG_TASK_OEVENTS_UPDATER_XML_DESCRIPTION</description>
+	<namespace path="src">Joomla\Plugin\Task\OEventsUpdater</namespace>
+	<files>
+		<folder plugin="oevents_updater">services</folder>
+		<folder>src</folder>
+	</files>
+	<languages>
+		<language tag="en-GB">language/en-GB/plg_task_oevents_updater.ini</language>
+		<language tag="en-GB">language/en-GB/plg_task_oevents_updater.sys.ini</language>
+	</languages>
+</extension>

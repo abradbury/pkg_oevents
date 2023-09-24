@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -e
+
 SALT=$(openssl rand -base64 18)
 PSWD=$(openssl rand -base64 18)
 
@@ -27,6 +29,10 @@ echo "Zipping OEvents library..."
 zip -r lib_oevents.zip lib_oevents
 
 echo
+echo "Zipping OEvents updater plugin..."
+zip -r plg_task_oevents_updater.zip plg_task_oevents_updater
+
+echo
 echo "Zipping OEvents package..."
 zip -r pkg_oevents.zip {*.xml,*.zip,language}
 
@@ -35,6 +41,7 @@ echo "Removing zip artifacts..."
 rm mod_oevents_external.zip
 rm com_oevents.zip
 rm lib_oevents.zip
+rm plg_task_oevents_updater.zip
 
 echo
 echo "Use the following values when setting up your cURL job: "

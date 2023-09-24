@@ -5,13 +5,14 @@
 	<author>abradbury</author>
 	<creationDate>January 2016</creationDate>
 	<packagename>oevents</packagename>
-	<version>1.3.1</version>
-	<url>http://www.southyorkshireorienteers.org.uk</url>
+	<version>2.0.0</version>
+	<url>https://www.southyorkshireorienteers.org.uk</url>
 	<description>PKG_OEVENTS_DESCRIPTION</description>
 	<files>
 		<file type="component" id="com_oevents" >com_oevents.zip</file>
 		<file type="module" id="oevents" client="site">mod_oevents_external.zip</file>
 		<file type="library" id="oevents">lib_oevents.zip</file>
+		<file type="plugin" id="oevents" group="task">plg_task_oevents_updater.zip</file>
 	</files>
 
 	<languages folder="language">
