@@ -2,20 +2,6 @@
 
 set -e
 
-SALT=$(openssl rand -base64 18)
-PSWD=$(openssl rand -base64 18)
-
-sed -i '' "s/SALT_PLACEHOLDER/$SALT/; s/PASSWORD_PLACEHOLDER/$PSWD/" com_oevents/site/controller.php
-sedResult=$?
-if [ $sedResult -ne 0 ]; then
-    echo ""
-    >&2 echo "Failed to insert generated token values. This can sometimes happen on macOS."
-    >&2 echo "Please try running this script again (sometimes several times) until it succeeds."
-    echo ""
-
-    exit $sedResult
-fi
-
 echo
 echo "Zipping OEvents module..."
 zip -r mod_oevents_external.zip mod_oevents_external
@@ -44,8 +30,4 @@ rm lib_oevents.zip
 rm plg_task_oevents_updater.zip
 
 echo
-echo "Use the following values when setting up your cURL job: "
-echo "  salt:     $SALT"
-echo "  password: $PSWD"
-echo 
 echo "All done"
