@@ -21,6 +21,7 @@ class OEventsUpdater  {
 	public function refresh() {
 		$this->params = ComponentHelper::getParams('com_oevents');
 		$eventLevel = http_build_query(['evt_level' => $this->params->get('eventLevel')]);
+		$postcode = str_replace(' ', '', $this->params->get('postcode'));
 
 		$until = new \DateTime('now +'.$this->params->get('lookAhead').' months');
 		$untilDay = $until->format('j');
@@ -29,7 +30,7 @@ class OEventsUpdater  {
 		$filterEnd = $until->format('d%2\Fm%2\FY');
 		$dateFilter = '&filter_end='.$filterEnd.'&filter_end_year='.$untilYear.'&filter_end_month='.$untilMonth.'&filter_end_day='.$untilDay;
 		
-		$url = 'https://www.britishorienteering.org.uk/index.php?pg=event&evt_postcode=' . urlencode($this->params->get('postcode')) . '&radius=' . $this->params->get('radius') . '&' . $eventLevel . '&bFilter=Filter' . $dateFilter;
+		$url = 'https://www.britishorienteering.org.uk/index.php?pg=event&evt_postcode=' . urlencode($postcode) . '&radius=' . $this->params->get('radius') . '&' . $eventLevel . '&bFilter=Filter' . $dateFilter;
 		$curlResponse = $this->curl($url);
 		$curlErrorMsg = $curlResponse['status'];
 		$scraped_page = $curlResponse['data'];
