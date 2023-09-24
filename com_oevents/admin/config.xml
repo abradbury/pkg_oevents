@@ -18,5 +18,7 @@
 		<field name="eventNameLimit" label="Max event name length (characters)" type="number" default="42" min="5" max="99" step="1" description="The number of characters to limit the event name to" />
 
 		<field name='excludedClub' label='Excluded Club' type='text' description='Note that only 1 club is currently supported' default='SYO' />
+
+		<field name='dateFormat' label='Date format' type='text' description='The PHP date format string defining how the dates should be shown. For possible values see: https://www.php.net/manual/en/datetime.format.php#refsect1-datetime.format-parameters' />
 	</fieldset>
 </config>

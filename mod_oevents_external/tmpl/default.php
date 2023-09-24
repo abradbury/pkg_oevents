@@ -15,7 +15,7 @@ defined('_JEXEC') or die; ?>
 	<tbody>
 		<?php if (sizeof($eventList) > 0) { foreach ($eventList as $event) : ?>
 		<tr>
-			<td><?php echo date("D jS M Y", strtotime($event['date'])); ?></td>
+			<td><?php echo $event['formattedDate']; ?></td>
 			<td><a href="<?php echo $event['url']; ?>"><?php echo $event['title']; ?></a></td>
 			<td><?php echo $event['venue']; ?></td>
 			<td><?php echo JText::_("COM_OEVENTS_EVENT_LEVEL_" . $event['level']); ?></td>

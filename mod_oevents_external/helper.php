@@ -5,8 +5,10 @@ jimport('joomla.application.component.helper');
 class ModOEventsExternalHelper {
 
 	public static function getEventsList() {
+		$params = JComponentHelper::getParams('com_oevents');
+
 		// Only get events X months ahead
-		$lookAheadMonths = (int)JComponentHelper::getParams('com_oevents')->get('lookAhead');
+		$lookAheadMonths = (int)$params->get('lookAhead');
 		if ($lookAheadMonths <= 0) {
 			$lookAheadMonths = 1;
 		}
@@ -32,10 +34,11 @@ class ModOEventsExternalHelper {
 			// JFactory::getApplication()->enqueueMessage('Error reading from database for external events', 'message');
 		}
 
-		// Limit the event name length
-		$eventNameLimit = (int)JComponentHelper::getParams('com_oevents')->get('eventNameLimit');
+		$eventNameLimit = (int)$params->get('eventNameLimit');
+		$dateFormat = $params->get('dateFormat');
 
 		for ($i=0; $i < sizeof($result); $i++) { 
+			// Limit the event name length
 			$fullTitle = htmlspecialchars((string) $result[$i]['title'], ENT_COMPAT, 'UTF-8');
 			if (mb_strlen($fullTitle) > $eventNameLimit) {
 				$title = mb_substr($fullTitle, 0, $eventNameLimit) . '...';
@@ -44,6 +47,9 @@ class ModOEventsExternalHelper {
 			}
 
 			$result[$i]['title'] = $title;
+
+			// Format the date
+			$result[$i]['formattedDate'] = date($dateFormat, strtotime($result[$i]['date']));
 		}
 		
 		return $result;
