@@ -79,7 +79,7 @@ class OEventsUpdater  {
 		}
 
 		$clubTemp = $this->scrape_between($separate_result, "<div class=\"event_field evt_club\">", "</div>");
-		$result['clubUrl'] = $this->scrape_between($clubTemp, "href=\"", "\" target=");
+		$result['clubUrl'] = html_entity_decode($this->scrape_between($clubTemp, "href=\"", "\" target="));
 		$clubNameTemp = preg_split("/<.*?>/", $clubTemp);
 		if (sizeof($clubNameTemp) > 3) {
 			$result['club'] = $clubNameTemp[3];
