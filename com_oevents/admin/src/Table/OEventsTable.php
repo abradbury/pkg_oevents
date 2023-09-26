@@ -4,6 +4,11 @@
  * @subpackage  com_oevents
  */
 
+namespace OEvents\Component\OEvents\Administrator\Table;
+
+use \Joomla\CMS\Table\Table;
+use \Joomla\Database\DatabaseDriver;
+
 // No direct access
 defined('_JEXEC') or die('Restricted access');
  
@@ -12,12 +17,12 @@ defined('_JEXEC') or die('Restricted access');
  *
  * @since  1.0.0
  */
-class OEventsTableOEvents extends JTable {
+class OEventsTable extends Table {
 	
 	/**
 	 * Constructor
 	 *
-	 * @param   JDatabaseDriver  &$db  A database connector object
+	 * @param   DatabaseDriver  &$db  A database connector object
 	 */
 	function __construct(&$db) {
 		parent::__construct('#__oevents_external', 'event_id', $db);

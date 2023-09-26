@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+	<fieldset>	
+		<field name="date" required="true" type="calendar" label="COM_OEVENTS_EDIT_DATE_LABEL" format="%Y-%m-%d" filterformat="Y-m-d" description="COM_OEVENTS_EDIT_DATE_DESC" />
+		<field name="title" required="true" type="text" label="COM_OEVENTS_EDIT_TITLE_LABEL" />
+		<field name="venue" type="text" label="COM_OEVENTS_EDIT_VENUE_LABEL" />
+
+		<field name="level" type="list" label="COM_OEVENTS_EDIT_LEVEL_LABEL">
+			<option value=""></option>
+			<option value="1">COM_OEVENTS_EVENT_LEVEL_1</option>
+			<option value="2">COM_OEVENTS_EVENT_LEVEL_2</option>
+			<option value="3">COM_OEVENTS_EVENT_LEVEL_3</option>
+			<option value="4">COM_OEVENTS_EVENT_LEVEL_4</option>
+			<option value="5">COM_OEVENTS_EVENT_LEVEL_5</option>
+		</field>
+
+		<field name="club" type="text" label="COM_OEVENTS_EDIT_CLUB_LABEL" />
+
+		<field name="url" required="true" validate="url" type="url" label="COM_OEVENTS_EDIT_URL_LABEL" />
+		<field name="clubUrl" validate="url" type="url" label="COM_OEVENTS_EDIT_CLUB_URL_LABEL" />
+
+		<field name="event_id" type="hidden" />
+		<field name="status" type="number" default="0" readonly="true" label="COM_OEVENTS_EDIT_STATUS_LABEL" description="COM_OEVENTS_EDIT_STATUS_DESC"></field>
+	</fieldset>
+</form>

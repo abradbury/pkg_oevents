@@ -4,6 +4,10 @@
  * @subpackage  com_oevents
  */
  
+namespace OEvents\Component\OEvents\Administrator\Controller; 
+
+use \Joomla\CMS\MVC\Controller\BaseController;
+
 // No direct access to this file
 defined('_JEXEC') or die('Restricted access');
  
@@ -14,7 +18,7 @@ defined('_JEXEC') or die('Restricted access');
  * @subpackage  com_oevents
  * @since       1.0.0
  */
-class OEventsController extends JControllerLegacy {
+class DisplayController extends BaseController {
 	
 	/**
 	 * The default view for the display method.

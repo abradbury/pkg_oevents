@@ -4,36 +4,48 @@
  * @subpackage  com_oevents
  */
  
+namespace OEvents\Component\OEvents\Administrator\Model;
+
+use \Joomla\CMS\Factory;
+use \Joomla\CMS\Table\Table;
+use \Joomla\CMS\Language\Text;
+use \Joomla\CMS\MVC\Model\AdminModel;
+
 // No direct access to this file
 defined('_JEXEC') or die('Restricted access');
  
 /**
  * OEvents Model
  */
-class OEventsModelEvent extends JModelAdmin {
+class EventModel extends AdminModel {
 	
 	/**
-	 * Method to get a table object, load it if necessary.
-	 *
-	 * @param   string  $type    The table name. Optional.
-	 * @param   string  $prefix  The class prefix. Optional.
-	 * @param   array   $config  Configuration array for model. Optional.
-	 *
-	 * @return  JTable  A JTable object
-	 *
-	 * @since   1.6
-	 */
-	public function getTable($type = 'OEvents', $prefix = 'OEventsTable', $config = []) {
-		return JTable::getInstance($type, $prefix, $config);
+     * Method to get a table object, load it if necessary.
+     *
+     * @param   string  $name     The table name. Optional.
+     * @param   string  $prefix   The class prefix. Optional.
+     * @param   array   $options  Configuration array for model. Optional.
+     *
+     * @return  Table  A Table object
+     *
+     * @since   3.0
+     * @throws  \Exception
+     */
+    public function getTable($name = 'OEvents', $prefix = 'Table', $options = []) {
+		if ($table = $this->_createTable($name, $prefix, $options)) {
+			return $table;
+		}
+
+		throw new \Exception(Text::sprintf('JLIB_APPLICATION_ERROR_TABLE_NAME_NOT_SUPPORTED', $name), 0);
 	}
- 
+
 	/**
 	 * Method to get the record form.
 	 *
 	 * @param   array    $data      Data for the form.
 	 * @param   boolean  $loadData  True if the form is to load its own data (default case), false if not.
 	 *
-	 * @return  mixed    A JForm object on success, false on failure
+	 * @return  mixed    A \Joomla\CMS\Form\Form object on success, false on failure
 	 *
 	 * @since   1.6
 	 */
@@ -64,7 +76,7 @@ class OEventsModelEvent extends JModelAdmin {
 	 */
 	protected function loadFormData() {
 		// Check the session for previously entered form data.
-		$data = JFactory::getApplication()->getUserState(
+		$data = Factory::getApplication()->getUserState(
 			'com_oevents.edit.event.data',
 			[]
 		);

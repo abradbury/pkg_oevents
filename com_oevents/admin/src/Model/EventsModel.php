@@ -4,17 +4,21 @@
  * @subpackage  com_oevents
  */
 
+namespace OEvents\Component\OEvents\Administrator\Model;
+
+use \Joomla\CMS\Factory;
+use \Joomla\CMS\MVC\Model\ListModel;
+use \Joomla\CMS\Component\ComponentHelper;
+
 // No direct access to this file
 defined('_JEXEC') or die('Restricted access');
 
-jimport('joomla.application.component.helper');
- 
 /**
  * OEventsList Model
  *
  * @since  0.0.1
  */
-class OEventsModelEvents extends JModelList {
+class EventsModel extends ListModel {
 	
 	/**
 	 * Method to build an SQL query to load the list data.
@@ -22,11 +26,11 @@ class OEventsModelEvents extends JModelList {
 	 * @return      string  An SQL query
 	 */
 	protected function getListQuery() {
-		// Initialize variables.
-		$db    = JFactory::getDbo();
+		// Initialise variables.
+		$db    = Factory::getDbo();
 		$query = $db->getQuery(true);
  
-		$lookAheadMonths = (int)JComponentHelper::getParams('com_oevents')->get('lookAhead');
+		$lookAheadMonths = (int)ComponentHelper::getParams('com_oevents')->get('lookAhead');
 		if ($lookAheadMonths <= 0) {
 			$lookAheadMonths = 1;
 		}
@@ -42,7 +46,7 @@ class OEventsModelEvents extends JModelList {
 	}
 
 	public function deleteEvents($ids) {
-		$db = JFactory::getDbo();
+		$db = Factory::getDbo();
 		$query = $db->getQuery(true);
 		
 		$conditions = $db->quoteName('event_id') . ' IN (' . implode(',', $ids) . ')';

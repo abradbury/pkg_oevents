@@ -4,10 +4,18 @@
  * @subpackage  com_oevents
  */
  
+namespace OEvents\Component\OEvents\Administrator\View\Event;
+
+use \Joomla\CMS\Factory;
+use \Joomla\CMS\Language\Text;
+use \Joomla\CMS\Toolbar\ToolbarHelper;
+use \Joomla\CMS\MVC\View\GenericDataException;
+use \Joomla\CMS\MVC\View\HtmlView as BaseHtmlView;
+
 // No direct access to this file
 defined('_JEXEC') or die('Restricted access');
  
-class OEventsViewEvent extends JViewLegacy {
+class HtmlView extends BaseHtmlView {
 	
 	protected $form = null;
  
@@ -25,11 +33,9 @@ class OEventsViewEvent extends JViewLegacy {
 		$this->item = $this->get('Item');
  
 		// Check for errors.
-		if (is_countable($errors = $this->get('Errors')) ? count($errors = $this->get('Errors')) : 0) {
-			JError::raiseError(500, implode('<br />', $errors));
-			return false;
-		}
- 
+		if (count($errors = $this->get('Errors'))) {
+            throw new GenericDataException(implode("\n", $errors), 500);
+        }
  
 		// Set the toolbar
 		$this->addToolBar();
@@ -46,7 +52,7 @@ class OEventsViewEvent extends JViewLegacy {
 	 * @since   1.6
 	 */
 	protected function addToolBar() {
-		$input = JFactory::getApplication()->input;
+		$input = Factory::getApplication()->input;
  
 		// Hide Joomla Administrator Main menu
 		$input->set('hidemainmenu', true);
@@ -54,15 +60,15 @@ class OEventsViewEvent extends JViewLegacy {
 		$isNew = ($this->item->event_id == 0);
  
 		if ($isNew) {
-			$title = JText::_('COM_OEVENTS') . ' - ' . JText::_('COM_OEVENTS_MANAGER_OEVENT_NEW');
+			$title = Text::_('COM_OEVENTS') . ' - ' . Text::_('COM_OEVENTS_MANAGER_OEVENT_NEW');
 		}
 		else {
-			$title = JText::_('COM_OEVENTS') . ' - ' . JText::_('COM_OEVENTS_EDIT_EVENT');
+			$title = Text::_('COM_OEVENTS') . ' - ' . Text::_('COM_OEVENTS_EDIT_EVENT');
 		}
  
-		JToolBarHelper::title($title, 'event');
-		JToolBarHelper::save('event.save');
-		JToolBarHelper::cancel(
+		ToolbarHelper::title($title, 'event');
+		ToolbarHelper::save('event.save');
+		ToolbarHelper::cancel(
 			'event.cancel',
 			$isNew ? 'JTOOLBAR_CANCEL' : 'JTOOLBAR_CLOSE'
 		);

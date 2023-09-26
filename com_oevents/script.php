@@ -1,5 +1,6 @@
 <?php
 
+use \Joomla\CMS\Factory;
 use Joomla\CMS\Installer\InstallerAdapter;
 
 class com_oeventsInstallerScript
@@ -76,7 +77,7 @@ class com_oeventsInstallerScript
 	private function maybeSetupUserActions()
 	{
 		$extension = 'com_oevents';
-		$db = JFactory::getDbo();
+		$db = Factory::getDbo();
 
 		// First we must check if it is already in the table or not...
 		// because of limitations in the library not doing this itself
@@ -96,15 +97,15 @@ class com_oeventsInstallerScript
 
 			return $this->maybeAddUserActionType($db, $extension);
 
-		} catch (RuntimeException $e) {
-			JFactory::getApplication()->enqueueMessage($e->getMessage());
+		} catch (\RuntimeException $e) {
+			Factory::getApplication()->enqueueMessage($e->getMessage());
 			return false;
 		}
 	}
 
 	private function maybeAddUserActionType($db, $extension)
 	{
-		$logConf = new stdClass();
+		$logConf = new \stdClass();
 		$logConf->id = 0;
 		$logConf->type_title = 'event';
 		$logConf->type_alias = $extension;
@@ -128,8 +129,8 @@ class com_oeventsInstallerScript
 				$result = $db->insertObject('#__action_log_config', $logConf, 'id');
 				return true;
 			}
-		} catch (RuntimeException $e) {
-			JFactory::getApplication()->enqueueMessage($e->getMessage());
+		} catch (\RuntimeException $e) {
+			Factory::getApplication()->enqueueMessage($e->getMessage());
 			return false;
 		}
 	}

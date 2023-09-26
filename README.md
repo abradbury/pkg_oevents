@@ -40,11 +40,14 @@ To setup this functionality, go to System -> Manage -> Scheduled Tasks -> New ->
 Please be considerate when choosing a refresh time as it would result in unnecessary traffic to the British Orienteering website. Refreshing once per day should be sufficient.
 
 ## TODO
- - Add namespacing to component
-   - The refresh button on the component backend does not work because of this
  - Add namespacing to module
+ - Link the component (config) to the schedule plugin - if possible.
+ - Finish adding support for overriding an automatically-added event
+ - Update text in main component as it refers to the old scheduling approach
 
 ## Bugs
  - Several warning messages are printed to the main OEvents manager page in the administrator section of the site after a clean install. Don't go away when there are events present
     - These are because the event level option default doesn't apply until it is saved by the user...
+ - When manually adding an event beyond the configured time horizon, the new event does not show. So change the code to show all events in the admin panel (and front-end), but limit the search for new events to the time horizon
+
  

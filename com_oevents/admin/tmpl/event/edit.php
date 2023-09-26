@@ -1,19 +1,25 @@
 <?php
 /**
  * @package     Joomla.Administrator
- * @subpackage  com_oevent
+ * @subpackage  com_oevents
  */
  
+namespace OEvents\Component\OEvents\Administrator\View\Event;
+
+use \Joomla\CMS\Router\Route;
+use \Joomla\CMS\Language\Text;
+use \Joomla\CMS\HTML\HTMLHelper;
+
 // No direct access
 defined('_JEXEC') or die('Restricted access');
 
-JHTML::_('behavior.formvalidator');
+HTMLHelper::_('behavior.formvalidator');
 ?>
-<form action="<?php echo JRoute::_('index.php?option=com_oevents&layout=edit&event_id=' . (int) $this->item->event_id); ?>"
+<form action="<?php echo Route::_('index.php?option=com_oevents&layout=edit&event_id=' . (int) $this->item->event_id); ?>"
 	method="post" name="adminForm" id="adminForm" class="form-validate">
 	<div class="form-horizontal">
 		<fieldset class="adminform">
-			<legend><?php echo(isset($this->item->event_id) ? JText::_('COM_OEVENTS_EDIT_EVENT') : JText::_('COM_OEVENTS_MANAGER_OEVENT_NEW') ); ?></legend>
+			<legend><?php echo(isset($this->item->event_id) ? Text::_('COM_OEVENTS_EDIT_EVENT') : Text::_('COM_OEVENTS_MANAGER_OEVENT_NEW') ); ?></legend>
 			<div class="row-fluid">
 				<div class="span6">
 					<?php foreach ($this->form->getFieldset() as $field): ?>
@@ -27,5 +33,5 @@ JHTML::_('behavior.formvalidator');
 		</fieldset>
 	</div>
 	<input type="hidden" name="task" value="event.edit" class="validate" />
-	<?php echo JHtml::_('form.token'); ?>
+	<?php echo HTMLHelper::_('form.token'); ?>
 </form>
