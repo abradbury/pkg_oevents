@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <config>
 	<fieldset name="main" label="COM_OEVENTS_CONFIG_LABEL" description="COM_OEVENTS_CONFIG_DESC">
-		<field name="eventLevel" label="Event levels" type="list" default="4" multiple="true">
+		<field name="eventLevel" label="COM_OEVENTS_CONFIG_FIELD_EVENT_LEVELS_LABEL" type="list" default="4" multiple="true">
 			<option value="1">COM_OEVENTS_EVENT_LEVEL_1</option>
 			<option value="2">COM_OEVENTS_EVENT_LEVEL_2</option>
 			<option value="3">COM_OEVENTS_EVENT_LEVEL_3</option>
@@ -9,16 +9,16 @@
 			<option value="5">COM_OEVENTS_EVENT_LEVEL_5</option>
 		</field>
 
-		<field name="postcode" label="Central postcode" type="text" default="S62 6AE" />
+		<field name="postcode" label="COM_OEVENTS_CONFIG_FIELD_POSTCODE_LABEL" type="text" default="S62 6AE" />
 
-		<field name="radius" label="Search radius (miles)" type="number" default="30" min="1" max="500" step="1" />
+		<field name="radius" label="COM_OEVENTS_CONFIG_FIELD_RADIUS_LABEL" type="number" default="30" min="1" max="500" step="1" />
 		
-		<field name="lookAhead" label="Look ahead (months)" type="number" default="6" min="1" max="24" step="1" description="Number of months to look ahead for events" />
+		<field name="lookAhead" label="COM_OEVENTS_CONFIG_FIELD_LOOK_AHEAD_LABEL" type="number" default="6" min="1" max="24" step="1" description="COM_OEVENTS_CONFIG_FIELD_LOOK_AHEAD_DESCRIPTION" />
 
-		<field name="eventNameLimit" label="Max event name length (characters)" type="number" default="42" min="5" max="99" step="1" description="The number of characters to limit the event name to" />
+		<field name="eventNameLimit" label="COM_OEVENTS_CONFIG_FIELD_MAX_EVENT_NAME_LENGTH_LABEL" type="number" default="42" min="5" max="99" step="1" description="COM_OEVENTS_CONFIG_FIELD_MAX_EVENT_NAME_LENGTH_DESCRIPTION" />
 
-		<field name='excludedClub' label='Excluded Club' type='text' description='Note that only 1 club is currently supported' default='SYO' />
+		<field name='excludedClub' label='COM_OEVENTS_CONFIG_FIELD_EXCLUDED_CLUB_LABEL' type='text' description='COM_OEVENTS_CONFIG_FIELD_EXCLUDED_CLUB_DESCRIPTION' default='SYO' />
 
-		<field name='dateFormat' label='Date format' type='text' description='The PHP date format string defining how the dates should be shown. For possible values see: https://www.php.net/manual/en/datetime.format.php#refsect1-datetime.format-parameters' />
+		<field name='dateFormat' label='COM_OEVENTS_CONFIG_FIELD_DATE_FORMAT_LABEL' type='text' description='COM_OEVENTS_CONFIG_FIELD_DATE_FORMAT_DESCRIPTION' />
 	</fieldset>
 </config>

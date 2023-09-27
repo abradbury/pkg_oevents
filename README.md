@@ -43,7 +43,6 @@ Please be considerate when choosing a refresh time as it would result in unneces
  - Add namespacing to module
  - Link the component (config) to the schedule plugin - if possible.
  - Finish adding support for overriding an automatically-added event
- - Update text in main component as it refers to the old scheduling approach
 
 ## Bugs
  - Several warning messages are printed to the main OEvents manager page in the administrator section of the site after a clean install. Don't go away when there are events present

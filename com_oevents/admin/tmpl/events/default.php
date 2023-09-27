@@ -36,21 +36,51 @@ $stringifiedList = join(' or ', $both);
 
 ?>
 
-<div class="row-fluid">
-	<div class="span3 well">
-		<h3>Configuration</h3>
-		<p>Showing events within <strong><?php echo $this->params->get('radius'); ?></strong> miles of <strong><?php echo $this->params->get('postcode'); ?></strong> that are of level <strong><?php echo $stringifiedList; ?></strong>.
-		<p>To configure these options, select the options menu from the toolbar.</p>
-		<p>OEvents checks for new or updated events periodically as defined by the website administrator when the component was set up.</p>
+<div class="row">
+	<div class="col order-last card">
+		<div class="card-body">
+			<h3 class="card-title"><?php echo Text::_('COM_OEVENTS_CONFIG_BOX_TITLE'); ?></h3>
+			<p class="card-text"><?php echo Text::_('COM_OEVENTS_CONFIG_BOX_DESCRIPTION'); ?></p>
+			<table class="table table-sm fs-6">
+				<tobdy>
+					<tr>
+						<th scope="row"><?php echo Text::_('COM_OEVENTS_CONFIG_FIELD_POSTCODE_LABEL'); ?></th>
+						<td><?php echo $this->params->get('postcode'); ?></td>
+					</tr>
+					<tr>
+						<th scope="row"><?php echo Text::_('COM_OEVENTS_CONFIG_FIELD_RADIUS_LABEL'); ?></th>
+						<td><?php echo $this->params->get('radius'); ?></td>
+					</tr>
+					<tr>
+						<th scope="row"><?php echo Text::_('COM_OEVENTS_CONFIG_FIELD_LOOK_AHEAD_LABEL'); ?></th>
+						<td><?php echo $this->params->get('lookAhead'); ?></td>
+					</tr>
+					<tr>
+						<th scope="row"><?php echo Text::_('COM_OEVENTS_CONFIG_FIELD_EVENT_LEVELS_LABEL'); ?></th>
+						<td><?php echo $stringifiedList; ?></td>
+					</tr>
+					<tr>
+						<th scope="row">Checks for updates</th>
+						<td>TODO</td>
+					</tr>
+					<tr>
+						<th scope="row">Last update check</th>
+						<td>TODO</td>
+					</tr>
+				</tobdy>
+			</table>
+		</div>
 	</div>
-	<div class="span9">
-		<h1>OEvents</h1>
-		<p><?php echo Text::_('COM_OEVENTS_DESCRIPTION'); ?></p>
-		<p>Whilst it is possible to edit or remove events acquired from remote sources (marked as AUTO), currently these updates will be discarded when OEvents next updates.</p>
-	
+	<div class="col">
+		<h1><?php echo Text::_('COM_OEVENTS'); ?></h1>
+		<?php echo Text::_('COM_OEVENTS_DESCRIPTION'); ?>
+	</div>
+</div>
+<div class="row">
+	<div>
 		<form action="index.php?option=com_oevents&amp;view=events" method="post" id="adminForm" name="adminForm">
 			<fieldset>
-				<legend>External Events</legend>
+				<legend><?php echo Text::_('COM_OEVENTS_BACKEND_TABLE_HEADER'); ?></legend>
 				<table class="table table-bordered">
 					<thead>
 						<tr>
@@ -89,7 +119,7 @@ $stringifiedList = join(' or ', $both);
 							<?php endforeach; ?>
 						<?php else : ?>
 							<tr>
-								<td colspan="7" style="text-align: center">No upcoming external events found</td>
+								<td colspan="7" style="text-align: center"><?php echo Text::_('COM_OEVENTS_NO_EVENTS'); ?></td>
 							</tr>
 						<?php endif; ?>
 					</tbody>
