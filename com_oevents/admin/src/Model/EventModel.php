@@ -11,6 +11,8 @@ use \Joomla\CMS\Table\Table;
 use \Joomla\CMS\Language\Text;
 use \Joomla\CMS\MVC\Model\AdminModel;
 
+use OEvents\Component\OEvents\Administrator\Utils\ActionLog;
+
 // No direct access to this file
 defined('_JEXEC') or die('Restricted access');
  
@@ -86,5 +88,36 @@ class EventModel extends AdminModel {
 		}
  
 		return $data;
+	}
+
+	/**
+     * Method to save the form data.
+     *
+     * @param   array  $data  The form data.
+     *
+     * @return  boolean  True on success, False on error.
+     *
+     * @since   1.6
+     */
+    public function save($data) {
+		$result = parent::save($data);
+
+		if ($result) {
+			if ($data['event_id'] == '0') {
+				ActionLog::recordEventAdded((object) [
+					// FIXME: We don't know the event ID at this point (it is 0)
+					// So the action log cannot link to the newly-created event.
+					// 'id'   => $data['event_id'],
+					'name' => $data['title']
+				]);
+			} else {
+				ActionLog::recordEventUpdated((object) [
+					'id'   => $data['event_id'],
+					'name' => $data['title']
+				]);
+			}
+		}
+
+		return $result;
 	}
 }
