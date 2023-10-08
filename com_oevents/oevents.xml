@@ -5,7 +5,7 @@
 	<creationDate>December 2015</creationDate>
 	<author>abradbury</author>
 	<authorUrl>https://www.southyorkshireorienteers.org.uk</authorUrl>
-	<version>2.4.0</version>
+	<version>2.4.1</version>
 	<description>COM_OEVENTS_DESCRIPTION</description>
 	<namespace path="src">OEvents\Component\OEvents</namespace>
 

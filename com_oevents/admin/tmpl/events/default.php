@@ -59,16 +59,9 @@ $stringifiedList = join(' or ', $both);
 						<th scope="row"><?php echo Text::_('COM_OEVENTS_CONFIG_FIELD_EVENT_LEVELS_LABEL'); ?></th>
 						<td><?php echo $stringifiedList; ?></td>
 					</tr>
-					<tr>
-						<th scope="row">Checks for updates</th>
-						<td>TODO</td>
-					</tr>
-					<tr>
-						<th scope="row">Last update check</th>
-						<td>TODO</td>
-					</tr>
 				</tobdy>
 			</table>
+			<p class="card-text"><?php echo Text::_('COM_OEVENTS_CONFIG_SCHEDULER'); ?></p>
 		</div>
 	</div>
 	<div class="col">
