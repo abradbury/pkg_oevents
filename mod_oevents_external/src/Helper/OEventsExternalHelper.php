@@ -1,11 +1,19 @@
 <?php
 
-jimport('joomla.application.component.helper');
+namespace OEvents\Module\OEventsExternal\Site\Helper;
 
-class ModOEventsExternalHelper {
+use Joomla\CMS\Factory;
+use Joomla\CMS\Component\ComponentHelper;
+use Joomla\Database\DatabaseAwareInterface;
+use Joomla\Database\DatabaseAwareTrait;
+
+\defined('_JEXEC') or die;
+
+class OEventsExternalHelper implements DatabaseAwareInterface {
+    use DatabaseAwareTrait;
 
 	public static function getEventsList() {
-		$params = JComponentHelper::getParams('com_oevents');
+		$params = ComponentHelper::getParams('com_oevents');
 
 		// Only get events X months ahead
 		$lookAheadMonths = (int)$params->get('lookAhead');
@@ -14,7 +22,7 @@ class ModOEventsExternalHelper {
 		}
 		$datePlus = date('Y-m-d', strtotime('+' . $lookAheadMonths . ' months', strtotime(date('Y-m-d'))));
 
-		$db = JFactory::getDbo();
+		$db = Factory::getDbo();
 		$query = $db->getQuery(true)
 					->select('*')
 					->from($db->quoteName('#__oevents_external'))
@@ -26,12 +34,9 @@ class ModOEventsExternalHelper {
 		try {
 			$db->setQuery($query);
 			$result = $db->loadAssocList();
-		} catch (RuntimeException $e) {
-			// FIXME: Running rector with UP_TO_PHP_80 removes the unused variable here, but it causes a runtime error
-			// https://github.com/rectorphp/rector/blob/main/docs/rector_rules_overview.md#removeunusedvariableincatchrector
-
+		} catch (\RuntimeException $e) {
 			// TODO: Debug log error message so user's can't see
-			// JFactory::getApplication()->enqueueMessage('Error reading from database for external events', 'message');
+			// Factory::getApplication()->enqueueMessage('Error reading from database for external events', 'message');
 		}
 
 		$eventNameLimit = (int)$params->get('eventNameLimit');

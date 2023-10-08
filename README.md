@@ -40,7 +40,6 @@ To setup this functionality, go to System -> Manage -> Scheduled Tasks -> New ->
 Please be considerate when choosing a refresh time as it would result in unnecessary traffic to the British Orienteering website. Refreshing once per day should be sufficient.
 
 ## TODO
- - Add namespacing to module
  - Link the component (config) to the schedule plugin - if possible.
  - Finish adding support for overriding an automatically-added event
 

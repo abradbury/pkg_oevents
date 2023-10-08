@@ -4,11 +4,11 @@
 	<creationDate>December 2015</creationDate>
 	<authorUrl>https://www.southyorkshireorienteers.org.uk</authorUrl>
 	<author>abradbury</author>
-	<version>1.4.0</version>
+	<version>2.0.0</version>
+	<namespace path="src">OEvents\Module\OEventsExternal</namespace>
 	<files>
-		<filename>mod_oevents_external.xml</filename>
-		<filename module="mod_oevents_external">mod_oevents_external.php</filename>
-		<filename>helper.php</filename>
-		<filename>tmpl/default.php</filename>
+		<folder module="mod_oevents_external">services</folder>
+		<folder>src</folder>
+		<folder>tmpl</folder>
 	</files>
 </extension>
