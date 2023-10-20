@@ -1,0 +1,13 @@
+<updates>
+	<update>
+        <name>OEvents Package</name>
+        <element>pkg_oevents</element>
+        <type>package</type>
+        <version>2.1.0</version>
+        <tags>
+            <tag>stable</tag>
+        </tags>
+        <targetplatform name="joomla" version="4.[01234]"/>
+        <php_minimum>8.0</php_minimum>
+    </update>
+</updates>

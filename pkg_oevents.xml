@@ -19,4 +19,8 @@
 	<languages folder="language">
 		<language tag="en-GB">en-GB/en-GB.pkg_oevents.sys.ini</language>
 	</languages>
+
+	<updateservers>
+		<server type="extension" name="OEvents">https://github.com/abradbury/pkg_oevents/blob/master/updates.xml</server>
+	</updateservers>
 </extension>
