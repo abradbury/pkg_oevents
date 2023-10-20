@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="module" client="site" method="upgrade">
+	<name>OEvents Summary</name>
+	<creationDate>October 2023</creationDate>
+	<authorUrl>https://www.southyorkshireorienteers.org.uk</authorUrl>
+	<author>abradbury</author>
+	<version>1.0.0</version>
+	<namespace path="src">OEvents\Module\OEventsSummary</namespace>
+	<files>
+		<folder module="mod_oevents_summary">services</folder>
+		<folder>src</folder>
+		<folder>tmpl</folder>
+        <folder>language</folder>
+	</files>
+    <languages>
+        <language tag="en-GB">language/en-GB/en-GB.mod_oevents_summary.ini</language>
+    </languages>
+    <config>
+		<fields name="params">
+			<fieldset name="basic">
+                <field
+                    name="eventsURL"
+                    type="text"
+                    label="MOD_OEVENTS_SUMMARY_EVENTS_URL_LABEL"
+                />
+			</fieldset>
+		</fields>
+	</config>
+</extension>
