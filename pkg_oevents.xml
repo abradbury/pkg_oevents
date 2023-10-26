@@ -5,7 +5,7 @@
 	<author>abradbury</author>
 	<creationDate>January 2016</creationDate>
 	<packagename>oevents</packagename>
-	<version>2.1.0</version>
+	<version>2.1.1</version>
 	<url>https://www.southyorkshireorienteers.org.uk</url>
 	<description>PKG_OEVENTS_DESCRIPTION</description>
 	<files>
@@ -21,6 +21,6 @@
 	</languages>
 
 	<updateservers>
-		<server type="extension" name="OEvents">https://github.com/abradbury/pkg_oevents/blob/master/updates.xml</server>
+		<server type="extension" name="OEvents">https://raw.githubusercontent.com/abradbury/pkg_oevents/master/updates.xml</server>
 	</updateservers>
 </extension>
