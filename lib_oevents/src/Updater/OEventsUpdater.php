@@ -70,7 +70,7 @@ class OEventsUpdater  {
 
 		// Sometimes there is this in the evt_name div: <span class="closing_soon">Closing date approaching</span>
 		$titleTemp = preg_split("/<span.*?/", $this->scrape_between($separate_result, "<div class=\"event_field evt_name\">", "</div>"));
-		$result['title'] = $titleTemp[0];
+		$result['title'] = html_entity_decode($titleTemp[0]);
 
 		$result['date'] = $this->scrape_between($separate_result, "<div class=\"event_field evt_date\">", "</div>");
 		$result['remote_id'] = (int) $this->scrape_between($separate_result, "<div class=\"event_tab_body\" id=\"event_tab_body_", "\"></div>");
@@ -108,7 +108,7 @@ class OEventsUpdater  {
 			CURLOPT_CONNECTTIMEOUT => 120,      // Setting the amount of time (in seconds) before the request times out
 			CURLOPT_TIMEOUT => 120,             // Setting the maximum amount of time for cURL to execute queries
 			CURLOPT_MAXREDIRS => 10,            // Setting the maximum number of redirections to follow
-			CURLOPT_USERAGENT => 'OEventsBot/2.0.3 (+https://github.com/abradbury, +' . Uri::root() . ')',  // Setting the useragent
+			CURLOPT_USERAGENT => 'OEventsBot/2.0.4 (+https://github.com/abradbury, +' . Uri::root() . ')',  // Setting the useragent
 			CURLOPT_URL => $url,                // Setting cURL's URL option with the $url variable passed into the function
   		];
 			
