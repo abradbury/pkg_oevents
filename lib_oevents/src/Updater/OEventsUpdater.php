@@ -38,8 +38,8 @@ class OEventsUpdater  {
 		$newEventsCount = 0;
 		if (empty($curlErrorMsg)) {
 			// Scraping downloaded data in $scraped_page for content
-			$results_page = $this->scrape_between($scraped_page, "<div class=\"event_list m-t", "<div class=\"text-center");
-			$separate_results = preg_split("/(<div class=\"event_item\">|<div class=\"event_item event_item_alt\">)/", $results_page );
+			$results_page = $this->scrape_between($scraped_page, "<div class=\"event_list", "<footer class=\"footer");
+			$separate_results = preg_split("/(<div id=\"evt[0-9]+\" class=\"card mb-3 event_item\">)/", $results_page);
 
 			// Skip the first element as this isn't an event, due to regex issue
 			$results = [];
@@ -69,31 +69,28 @@ class OEventsUpdater  {
 		$result = [];
 
 		// Sometimes there is this in the evt_name div: <span class="closing_soon">Closing date approaching</span>
-		$titleTemp = preg_split("/<span.*?/", $this->scrape_between($separate_result, "<div class=\"event_field evt_name\">", "</div>"));
+		$titleTemp = preg_split("/<span.*?/", $this->scrape_between($separate_result, "<strong>", "</strong>"));
 		$result['title'] = html_entity_decode($titleTemp[0]);
 
-		$result['date'] = $this->scrape_between($separate_result, "<div class=\"event_field evt_date\">", "</div>");
-		$result['remote_id'] = (int) $this->scrape_between($separate_result, "<div class=\"event_tab_body\" id=\"event_tab_body_", "\"></div>");
+		$result['date'] = $this->scrape_between($separate_result, "</strong><strong>", "</strong>");
+		$result['remote_id'] = (int) $this->scrape_between($separate_result, "data-event-id=\"", "\"");
+		$result['venue'] = $this->scrape_between($separate_result, "target=\"_blank\"\">", "</a></div><div");
 
-		$venueTemp = preg_split("/<.*?>/", $this->scrape_between($separate_result, "<div class=\"event_field evt_venue\">", "</div>"));
-		if (sizeof($venueTemp) > 3) {
-			$result['venue'] = $venueTemp[3];
-		} else {
-			$result['venue'] = '';
-		}
-
-		$clubTemp = $this->scrape_between($separate_result, "<div class=\"event_field evt_club\">", "</div>");
+		$clubTemp = $this->scrape_between($separate_result, "<label>Club:</label>", "</a></div>");
 		$result['clubUrl'] = html_entity_decode($this->scrape_between($clubTemp, "href=\"", "\" target="));
 		$clubNameTemp = preg_split("/<.*?>/", $clubTemp);
-		if (sizeof($clubNameTemp) > 3) {
-			$result['club'] = $clubNameTemp[3];
+		if (sizeof($clubNameTemp) == 2) {
+			$result['club'] = $clubNameTemp[1];
 		} else {
 			$result['club'] = '';
 		}
 
-		$result['level'] = str_replace('Level ', '', $this->scrape_between($separate_result, "<div class=\"event_field evt_level\"><label>Level:</label>", "</div>"));
-		$urlTemp = explode(',', $this->scrape_between($separate_result, "<input type=\"hidden\" name=\"event_ids\" id=\"event_ids\" value=\"", "\" />"));
-		$result['url'] = "https://www.britishorienteering.org.uk/index.php?pg=event&event=" . array_pop($urlTemp);
+		$result['level'] = str_replace('&nbsp;', '', $this->scrape_between($separate_result, "<label>Level:</label>", "</div>"));
+		$urlTemp = $this->scrape_between(
+			$this->scrape_between($separate_result, "<a class=\"btn btn-success\"", ">Full details</a>"),
+			"href=\"", "\""
+		);
+		$result['url'] = "https://www.britishorienteering.org.uk/" . $urlTemp;
 
 		return $result;
 	}
@@ -108,7 +105,7 @@ class OEventsUpdater  {
 			CURLOPT_CONNECTTIMEOUT => 120,      // Setting the amount of time (in seconds) before the request times out
 			CURLOPT_TIMEOUT => 120,             // Setting the maximum amount of time for cURL to execute queries
 			CURLOPT_MAXREDIRS => 10,            // Setting the maximum number of redirections to follow
-			CURLOPT_USERAGENT => 'OEventsBot/2.0.4 (+https://github.com/abradbury, +' . Uri::root() . ')',  // Setting the useragent
+			CURLOPT_USERAGENT => 'OEventsBot/2.1.0 (+https://github.com/abradbury, +' . Uri::root() . ')',  // Setting the useragent
 			CURLOPT_URL => $url,                // Setting cURL's URL option with the $url variable passed into the function
   		];
 			
