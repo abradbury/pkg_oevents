@@ -4,8 +4,9 @@
 	<creationDate>October 2023</creationDate>
 	<authorUrl>https://www.southyorkshireorienteers.org.uk</authorUrl>
 	<author>abradbury</author>
-	<version>1.0.0</version>
+	<version>1.1.0</version>
 	<namespace path="src">OEvents\Module\OEventsSummary</namespace>
+	<targetplatform name="joomla" version="(6\.)" />
 	<files>
 		<folder module="mod_oevents_summary">services</folder>
 		<folder>src</folder>

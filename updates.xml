@@ -1,4 +1,16 @@
 <updates>
+    <update>
+        <name>OEvents Package</name>
+        <element>pkg_oevents</element>
+        <type>package</type>
+        <version>2.5.0</version>
+        <targetplatform name="joomla" version="(6\.)" />
+        <downloads>
+            <downloadurl type="full" format="zip">
+                https://github.com/yourusername/oevents/releases/download/v2.5.0/pkg_oevents.zip
+            </downloadurl>
+        </downloads>
+    </update>
 	<update>
         <name>OEvents Package</name>
         <element>pkg_oevents</element>

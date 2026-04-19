@@ -20,7 +20,7 @@ This component is not intended as a full-on event management system, there are o
     1) System -> Install -> Extensions
     2) Upload package file and point to the `pkg_oevents` file 
 4) Enable the OEvents Updater plugin
-5) Use the Joomla 4 "Scheduled Tasks" functionality to automate the checking for new events (details [below](#automated-refresh)).
+5) Use the Joomla "Scheduled Tasks" functionality to automate the checking for new events (details [below](#automated-refresh)).
 
 ## Usage
 
