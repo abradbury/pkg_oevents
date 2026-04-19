@@ -1,48 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<extension type="component" method="upgrade">
-
-	<name>OEvents</name>
-	<creationDate>December 2015</creationDate>
-	<author>abradbury</author>
-	<authorUrl>https://www.southyorkshireorienteers.org.uk</authorUrl>
-	<version>2.4.1</version>
-	<description>COM_OEVENTS_DESCRIPTION</description>
-	<namespace path="src">OEvents\Component\OEvents</namespace>
-
-	<scriptfile>script.php</scriptfile>
-
-	<install>
-		<sql>
-			<file driver="mysql" charset="utf8">sql/install.mysql.utf8.sql</file>
-		</sql>
-	</install>
-	<uninstall>
-		<sql>
-			<file driver="mysql" charset="utf8">sql/uninstall.mysql.utf8.sql</file>
-		</sql>
-	</uninstall>
-	<update>
-		<schemas>
-			<schemapath type="mysql">sql/updates/mysql</schemapath>
-		</schemas>
-	</update>
-
-	<administration>
-		<menu link='index.php?option=com_oevents'>COM_OEVENTS_MENU</menu>
-		<files folder="admin">
-			<file>config.xml</file>
-			<folder>forms</folder>
-			<folder>language</folder>
-			<folder>services</folder>
-			<folder>sql</folder>
-			<folder>src</folder>
-			<folder>tmpl</folder>
-		</files>
-
-		<languages>
-			<language tag="en-GB">admin/language/en-GB/en-GB.com_oevents.ini</language>
-			<language tag="en-GB">admin/language/en-GB/en-GB.com_oevents.sys.ini</language>
-		</languages>
-	</administration>
-
+<extension type="component" version="1.0" client="site" method="upgrade">
+  <name>com_oevents</name>
+  <version>1.0</version>
+  <description>OEvents Component</description>
+  <targetplatform>joomla-6</targetplatform>
+  <!-- Other necessary configurations here -->
 </extension>
