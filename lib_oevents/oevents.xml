@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE extension>
-<extension type="library" version="6.0" method="upgrade">
+<extension type="library" method="upgrade">
     <name>OEvents Library</name>
     <libraryname>oevents</libraryname>
     <version>2.5.0</version>
@@ -9,6 +9,7 @@
 	<authorUrl>https://www.southyorkshireorienteers.org.uk</authorUrl>
     <description>OEvents framework</description>
     <namespace path="src">OEvents\Library</namespace>
+    <targetplatform name="joomla" version="(6\.)" />
     <files>
         <folder>src</folder>
         <filename>oevents.xml</filename>

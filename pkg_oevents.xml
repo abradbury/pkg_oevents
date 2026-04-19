@@ -8,7 +8,7 @@
 	<version>2.5.0</version>
 	<url>https://www.southyorkshireorienteers.org.uk</url>
 	<description>PKG_OEVENTS_DESCRIPTION</description>
-	<targetplatform name="joomla" version="6.*" />
+	<targetplatform name="joomla" version="(6\.)" />
 	<files>
 		<file type="component" id="com_oevents" >com_oevents.zip</file>
 		<file type="module" id="oevents" client="site">mod_oevents_external.zip</file>

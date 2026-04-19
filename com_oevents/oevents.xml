@@ -8,7 +8,7 @@
 	<version>2.5.0</version>
 	<description>COM_OEVENTS_DESCRIPTION</description>
 	<namespace path="src">OEvents\Component\OEvents</namespace>
-  <targetplatform name="joomla" version="6.*" />
+	<targetplatform name="joomla" version="(6\.)" />
 
 	<scriptfile>script.php</scriptfile>
 
