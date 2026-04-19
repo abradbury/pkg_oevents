@@ -52,7 +52,7 @@ class HtmlView extends BaseHtmlView {
 	 * @since   1.6
 	 */
 	protected function addToolBar() {
-		$input = Factory::getApplication()->input;
+		$input = Factory::getApplication()->getInput();
  
 		// Hide Joomla Administrator Main menu
 		$input->set('hidemainmenu', true);

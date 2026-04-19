@@ -52,7 +52,7 @@ class EventsController extends AdminController {
 		// Check for request forgeries
         $this->checkToken();
 
-		$ids = Factory::getApplication()->input->post->get('cid');
+		$ids = Factory::getApplication()->getInput()->post->get('cid');
 
 		if (empty($ids)) {
 			throw new \Exception(Text::_('JERROR_NO_ITEMS_SELECTED'), 500);
@@ -78,7 +78,7 @@ class EventsController extends AdminController {
 				Factory::getApplication()->enqueueMessage('Error deleting event(s)', 'error');
 			}
 		}
-		$this->setRedirect('index.php?option='.Factory::getApplication()->input->get->get('option'));
+		$this->setRedirect('index.php?option='.Factory::getApplication()->getInput()->get->get('option'));
 	}
 
 	private function getEvents($ids) {
@@ -111,7 +111,7 @@ class EventsController extends AdminController {
 		}
 
 		// Refresh page with message
-		$this->setRedirect('index.php?option='.Factory::getApplication()->input->get->get('option'));
+		$this->setRedirect('index.php?option='.Factory::getApplication()->getInput()->get->get('option'));
 	}
 
 }
