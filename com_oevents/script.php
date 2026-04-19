@@ -1,6 +1,6 @@
 <?php
 
-use \Joomla\CMS\Factory;
+use Joomla\CMS\Factory;
 use Joomla\CMS\Installer\InstallerAdapter;
 
 class com_oeventsInstallerScript
@@ -135,5 +135,3 @@ class com_oeventsInstallerScript
 		}
 	}
 }
-
-?>
