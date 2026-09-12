@@ -93,7 +93,11 @@ $stringifiedList = join(' or ', $both);
 								<tr>
 									<td><?php echo HTMLHelper::_('grid.id', $i, $row->event_id); ?></td>
 									<td><?php echo $row->date; ?></td>
-									<td><a href="<?php echo $editLink; ?>" title="<?php echo Text::_('COM_OEVENTS_EDIT_EVENT'); ?>"><?php echo $row->title; ?></a></td>
+									<td><?php if ($this->canDo->get('core.edit')) : ?>
+										<a href="<?php echo $editLink; ?>" title="<?php echo Text::_('COM_OEVENTS_EDIT_EVENT'); ?>"><?php echo $row->title; ?></a>
+									<?php else : ?>
+										<?php echo $row->title; ?>
+									<?php endif; ?></td>
 									<td><?php echo $row->venue; ?></td>
 									<td><?php if (!empty($row->level)) { 
 										echo Text::_("COM_OEVENTS_EVENT_LEVEL_" . $row->level);

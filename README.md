@@ -29,6 +29,19 @@ The OEvents component only provides a back-end view for managing events. Here, a
 
 ![A screen-shot of the OEvents manager](oevents_manager.png)
 
+### Permissions
+OEvents supports Joomla's access control (ACL). Permissions are set per user group in the component's Options, under the Permissions tab. By default they are inherited from the Global Configuration.
+
+| Permission | Allows the user to |
+|---|---|
+| Access Administration Interface | Open the OEvents manager |
+| Create | Add events manually and run a manual refresh |
+| Edit | Edit existing events |
+| Delete | Delete events |
+| Configure Options / Configure ACL & Options | Change the component options / permissions |
+
+Automated refreshes run through the Scheduled Tasks plugin, so they are not affected by these permissions.
+
 ### Module
 The OEvents module is how the events are displayed to the users of your website. Simply configure the module in the same way all Joomla modules are configured and it will show any events discovered/added by the OEvents component.
 

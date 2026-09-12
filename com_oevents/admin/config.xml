@@ -21,4 +21,8 @@
 
 		<field name='dateFormat' label='COM_OEVENTS_CONFIG_FIELD_DATE_FORMAT_LABEL' type='text' description='COM_OEVENTS_CONFIG_FIELD_DATE_FORMAT_DESCRIPTION' />
 	</fieldset>
+
+	<fieldset name="permissions" label="JCONFIG_PERMISSIONS_LABEL">
+		<field name="rules" type="rules" label="JCONFIG_PERMISSIONS_LABEL" filter="rules" validate="rules" component="com_oevents" section="component" />
+	</fieldset>
 </config>

@@ -8,6 +8,7 @@ namespace OEvents\Component\OEvents\Administrator\View\Events;
 
 use \Joomla\CMS\Language\Text;
 use \Joomla\CMS\Toolbar\ToolbarHelper;
+use \Joomla\CMS\Helper\ContentHelper;
 use \Joomla\CMS\Component\ComponentHelper;
 use \Joomla\CMS\MVC\View\GenericDataException;
 use \Joomla\CMS\MVC\View\HtmlView as BaseHtmlView;
@@ -21,11 +22,18 @@ defined('_JEXEC') or die('Restricted access');
  * @since  0.0.1
  */
 class HtmlView extends BaseHtmlView {
-	
+
+	/**
+	 * The actions the current user is permitted to perform on com_oevents.
+	 *
+	 * @var  object
+	 */
+	protected $canDo;
+
 	/**
 	 * Display the OEvents view
 	 *
-	 * @param   string  $tpl  The name of the template file to parse; 
+	 * @param   string  $tpl  The name of the template file to parse;
 	 * 		automatically searches through the template paths.
 	 *
 	 * @return  void
@@ -35,6 +43,7 @@ class HtmlView extends BaseHtmlView {
 		$this->items		= $this->get('Items');
 		$this->pagination	= $this->get('Pagination');
 		$this->params 		= ComponentHelper::getParams('com_oevents');
+		$this->canDo		= ContentHelper::getActions('com_oevents');
  
 		// Check for errors.
 		if (count($errors = $this->get('Errors'))) {
@@ -57,14 +66,26 @@ class HtmlView extends BaseHtmlView {
 	 */
 	protected function addToolBar() {
 		ToolbarHelper::title(Text::_('COM_OEVENTS_MANAGER_OEVENTS'));
-		ToolbarHelper::addNew('event.add');
-		ToolbarHelper::editList('event.edit');
-		ToolbarHelper::deleteList('', 'events.delete');
-		ToolbarHelper::custom('events.refresh', 'refresh', 'refresh', 'COM_OEVENTS_REFRESH', false);
 
-		// $canDo = ContentHelper::getActions('com_mywalks');
-		// if ($canDo->get('core.create')) { ToolbarHelper::addNew('event.add'); }
+		if ($this->canDo->get('core.create')) {
+			ToolbarHelper::addNew('event.add');
+		}
 
-		ToolbarHelper::preferences('com_oevents');
+		if ($this->canDo->get('core.edit')) {
+			ToolbarHelper::editList('event.edit');
+		}
+
+		if ($this->canDo->get('core.delete')) {
+			ToolbarHelper::deleteList('', 'events.delete');
+		}
+
+		// A refresh adds events, so it requires the create permission
+		if ($this->canDo->get('core.create')) {
+			ToolbarHelper::custom('events.refresh', 'refresh', 'refresh', 'COM_OEVENTS_REFRESH', false);
+		}
+
+		if ($this->canDo->get('core.admin') || $this->canDo->get('core.options')) {
+			ToolbarHelper::preferences('com_oevents');
+		}
 	}
 }

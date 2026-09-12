@@ -48,11 +48,9 @@ class EventsModel extends ListModel {
 	public function deleteEvents($ids) {
 		$db = Factory::getDbo();
 		$query = $db->getQuery(true);
-		
-		$conditions = $db->quoteName('event_id') . ' IN (' . implode(',', $ids) . ')';
-		 
+
 		$query->delete($db->quoteName('#__oevents_external'));
-		$query->where($conditions);
+		$query->whereIn($db->quoteName('event_id'), array_map('intval', $ids));
 		 
 		$db->setQuery($query);
 		$result = $db->execute();  

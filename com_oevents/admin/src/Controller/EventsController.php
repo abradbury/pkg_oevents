@@ -52,7 +52,13 @@ class EventsController extends AdminController {
 		// Check for request forgeries
         $this->checkToken();
 
-		$ids = Factory::getApplication()->getInput()->post->get('cid');
+		if (!Factory::getApplication()->getIdentity()->authorise('core.delete', 'com_oevents')) {
+			Factory::getApplication()->enqueueMessage(Text::_('JLIB_APPLICATION_ERROR_DELETE_NOT_PERMITTED'), 'error');
+			$this->setRedirect('index.php?option='.Factory::getApplication()->getInput()->get->get('option'));
+			return;
+		}
+
+		$ids = array_filter((array) Factory::getApplication()->getInput()->post->get('cid', [], 'int'));
 
 		if (empty($ids)) {
 			throw new \Exception(Text::_('JERROR_NO_ITEMS_SELECTED'), 500);
@@ -96,6 +102,13 @@ class EventsController extends AdminController {
 	public function refresh() {
 		// Check for request forgeries
 		$this->checkToken();
+
+		// A refresh adds events, so it requires the create permission
+		if (!Factory::getApplication()->getIdentity()->authorise('core.create', 'com_oevents')) {
+			Factory::getApplication()->enqueueMessage(Text::_('JERROR_ALERTNOAUTHOR'), 'error');
+			$this->setRedirect('index.php?option='.Factory::getApplication()->getInput()->get->get('option'));
+			return;
+		}
 
 		$updater = new OEventsUpdater();
 		$updaterResponse = $updater->refresh();

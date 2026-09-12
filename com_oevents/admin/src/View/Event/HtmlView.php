@@ -9,6 +9,7 @@ namespace OEvents\Component\OEvents\Administrator\View\Event;
 use \Joomla\CMS\Factory;
 use \Joomla\CMS\Language\Text;
 use \Joomla\CMS\Toolbar\ToolbarHelper;
+use \Joomla\CMS\Helper\ContentHelper;
 use \Joomla\CMS\MVC\View\GenericDataException;
 use \Joomla\CMS\MVC\View\HtmlView as BaseHtmlView;
 
@@ -66,8 +67,14 @@ class HtmlView extends BaseHtmlView {
 			$title = Text::_('COM_OEVENTS') . ' - ' . Text::_('COM_OEVENTS_EDIT_EVENT');
 		}
  
+		$canDo = ContentHelper::getActions('com_oevents');
+
 		ToolbarHelper::title($title, 'event');
-		ToolbarHelper::save('event.save');
+
+		if ($isNew ? $canDo->get('core.create') : $canDo->get('core.edit')) {
+			ToolbarHelper::save('event.save');
+		}
+
 		ToolbarHelper::cancel(
 			'event.cancel',
 			$isNew ? 'JTOOLBAR_CANCEL' : 'JTOOLBAR_CLOSE'

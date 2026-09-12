@@ -3,6 +3,22 @@
         <name>OEvents Package</name>
         <element>pkg_oevents</element>
         <type>package</type>
+        <version>2.6.0</version>
+        <infourl title="OEvents 2.6.0">https://github.com/abradbury/pkg_oevents/releases/tag/v2.6.0</infourl>
+        <downloads>
+            <downloadurl type="full" format="zip">https://github.com/abradbury/pkg_oevents/releases/download/v2.6.0/pkg_oevents.zip</downloadurl>
+        </downloads>
+        <tags>
+            <tag>stable</tag>
+        </tags>
+        <targetplatform name="joomla" version="[56]\." />
+        <client>site</client>
+        <php_minimum>8.1</php_minimum>
+    </update>
+    <update>
+        <name>OEvents Package</name>
+        <element>pkg_oevents</element>
+        <type>package</type>
         <version>2.5.1</version>
         <infourl title="OEvents 2.5.1">https://github.com/abradbury/pkg_oevents/releases/tag/v2.5.1</infourl>
         <downloads>
