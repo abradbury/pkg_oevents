@@ -18,6 +18,11 @@ Factory::getLanguage()->load('com_oevents');
 
 class OEventsUpdater  {
 
+	/**
+	 * @var \Joomla\Registry\Registry
+	 */
+	private $params;
+
 	public function refresh() {
 		$this->params = ComponentHelper::getParams('com_oevents');
 		$eventLevel = http_build_query(['evt_level' => $this->params->get('eventLevel')]);

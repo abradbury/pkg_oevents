@@ -5,8 +5,8 @@ A simple Joomla package that periodically crawls the [British Orienteering event
 This component is not intended as a full-on event management system, there are other Joomla components that manage this, such as [JEM](https://www.joomlaeventmanager.net). 
 
 ## Requirements
-* Joomla 4.2+
-* PHP 8.2+
+* Joomla 5.x or 6.x
+* PHP 8.1+ (Joomla 6 itself requires PHP 8.3+)
 
 ## Installation
 1) Clone this repository
@@ -33,7 +33,7 @@ The OEvents component only provides a back-end view for managing events. Here, a
 The OEvents module is how the events are displayed to the users of your website. Simply configure the module in the same way all Joomla modules are configured and it will show any events discovered/added by the OEvents component.
 
 ### Automated Refresh
-To enable automated refreshing of events that match your criteria, OEvents includes a plugin that is compatible with Joomla 4's "Scheduled Tasks" functionality. 
+To enable automated refreshing of events that match your criteria, OEvents includes a plugin that is compatible with Joomla's "Scheduled Tasks" functionality. 
 
 To setup this functionality, go to System -> Manage -> Scheduled Tasks -> New -> Update OEvents and select how often you would like to check for new events. 
 
