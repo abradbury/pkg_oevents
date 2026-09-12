@@ -43,8 +43,9 @@ class OEventsExternalHelper implements DatabaseAwareInterface {
 		$dateFormat = $params->get('dateFormat');
 
 		for ($i=0; $i < sizeof($result); $i++) { 
-			// Limit the event name length
-			$fullTitle = htmlspecialchars((string) $result[$i]['title'], ENT_COMPAT, 'UTF-8');
+			// Limit the event name length. The layout escapes it; escaping here would
+			// double-escape it, and truncating could cut an HTML entity in half.
+			$fullTitle = (string) $result[$i]['title'];
 			if (mb_strlen($fullTitle) > $eventNameLimit) {
 				$title = mb_substr($fullTitle, 0, $eventNameLimit) . '...';
 			} else {
@@ -55,9 +56,25 @@ class OEventsExternalHelper implements DatabaseAwareInterface {
 
 			// Format the date
 			$result[$i]['formattedDate'] = date($dateFormat, strtotime($result[$i]['date']));
+
+			// Only link to web pages, e.g. never to javascript: URLs
+			$result[$i]['url']     = self::toWebUrl($result[$i]['url']);
+			$result[$i]['clubUrl'] = self::toWebUrl($result[$i]['clubUrl']);
 		}
 		
 		return $result;
+	}
+
+	/**
+	 * @param   string|null  $url  The URL to check
+	 *
+	 * @return  string  The URL if it is an http(s) URL, otherwise an empty string
+	 */
+	private static function toWebUrl($url) {
+		$url = trim((string) $url);
+		$scheme = strtolower((string) parse_url($url, PHP_URL_SCHEME));
+
+		return \in_array($scheme, ['http', 'https'], true) ? $url : '';
 	}
 	
 }

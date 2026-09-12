@@ -1,8 +1,13 @@
-<?php 
+<?php
 // No direct access
-defined('_JEXEC') or die; 
+defined('_JEXEC') or die;
 
 use Joomla\CMS\Language\Text;
+
+// Event data can come from a remote website, so escape everything that is output
+$escape = static function ($value) {
+	return htmlspecialchars((string) $value, ENT_QUOTES, 'UTF-8');
+};
 ?>
 
 <table class="table table-bordered">
@@ -18,16 +23,21 @@ use Joomla\CMS\Language\Text;
 	<tbody>
 		<?php if (sizeof($events) > 0) { foreach ($events as $event) : ?>
 		<tr>
-			<td><?php echo $event['formattedDate']; ?></td>
-			<td><a href="<?php echo $event['url']; ?>"><?php echo $event['title']; ?></a></td>
-			<td><?php echo $event['venue']; ?></td>
-			<td><?php if (!empty($event['level'])) {
-				echo Text::_("COM_OEVENTS_EVENT_LEVEL_" . $event['level']);
-			} ?></td>
-			<td><?php if ($event['clubUrl'] != "") {?>
-				<a href="<?php echo $event['clubUrl']; ?>"><?php echo $event['club']; ?></a>
+			<td><?php echo $escape($event['formattedDate']); ?></td>
+			<td><?php if ($event['url'] !== '') { ?>
+				<a href="<?php echo $escape($event['url']); ?>"><?php echo $escape($event['title']); ?></a>
 				<?php } else { ?>
-				<?php echo $event['club']; ?>
+				<?php echo $escape($event['title']); ?>
+				<?php } ?>
+			</td>
+			<td><?php echo $escape($event['venue']); ?></td>
+			<td><?php if (!empty($event['level'])) {
+				echo $escape(Text::_("COM_OEVENTS_EVENT_LEVEL_" . (int) $event['level']));
+			} ?></td>
+			<td><?php if ($event['clubUrl'] !== '') { ?>
+				<a href="<?php echo $escape($event['clubUrl']); ?>"><?php echo $escape($event['club']); ?></a>
+				<?php } else { ?>
+				<?php echo $escape($event['club']); ?>
 				<?php } ?>
 			</td>
 		</tr>

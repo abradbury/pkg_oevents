@@ -78,10 +78,11 @@ class EventsController extends AdminController {
 						'name' => $event->title
 					]);
 
-					Factory::getApplication()->enqueueMessage('Successfully deleted event: ' . $event->title, 'message');
+					// Messages are output as HTML, so escape the (possibly scraped) title
+					Factory::getApplication()->enqueueMessage(Text::sprintf('COM_OEVENTS_EVENT_DELETED', htmlspecialchars((string) $event->title, ENT_QUOTES, 'UTF-8')), 'message');
 				}
 			} else {
-				Factory::getApplication()->enqueueMessage('Error deleting event(s)', 'error');
+				Factory::getApplication()->enqueueMessage(Text::_('COM_OEVENTS_EVENT_DELETE_ERROR'), 'error');
 			}
 		}
 		$this->setRedirect('index.php?option='.Factory::getApplication()->getInput()->get->get('option'));
@@ -118,9 +119,9 @@ class EventsController extends AdminController {
 		
 		if (empty($updaterStatus)) {
 			ActionLog::recordManualRefresh();
-			Factory::getApplication()->enqueueMessage($numberOfNewEvents . ' events found', 'message');
+			Factory::getApplication()->enqueueMessage(Text::sprintf('COM_OEVENTS_REFRESH_SUCCESS', (int) $numberOfNewEvents), 'message');
 		} else {
-			Factory::getApplication()->enqueueMessage('Error finding events: ' . $updaterStatus, 'warning');
+			Factory::getApplication()->enqueueMessage(Text::sprintf('COM_OEVENTS_REFRESH_ERROR', htmlspecialchars((string) $updaterStatus, ENT_QUOTES, 'UTF-8')), 'warning');
 		}
 
 		// Refresh page with message

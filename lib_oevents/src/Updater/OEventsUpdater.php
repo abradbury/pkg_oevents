@@ -10,11 +10,9 @@ namespace OEvents\Library\Updater;
 
 use \Joomla\CMS\Factory;
 use \Joomla\CMS\Uri\Uri;
-use \Joomla\CMS\Language\Text;
 use \Joomla\CMS\Component\ComponentHelper;
 
 \defined('_JEXEC') or die();
-Factory::getLanguage()->load('com_oevents');
 
 class OEventsUpdater  {
 
@@ -35,7 +33,7 @@ class OEventsUpdater  {
 		$filterEnd = $until->format('d%2\Fm%2\FY');
 		$dateFilter = '&filter_end='.$filterEnd.'&filter_end_year='.$untilYear.'&filter_end_month='.$untilMonth.'&filter_end_day='.$untilDay;
 		
-		$url = 'https://www.britishorienteering.org.uk/index.php?pg=event&evt_postcode=' . urlencode($postcode) . '&radius=' . $this->params->get('radius') . '&' . $eventLevel . '&bFilter=Filter' . $dateFilter;
+		$url = 'https://www.britishorienteering.org.uk/index.php?pg=event&evt_postcode=' . urlencode($postcode) . '&radius=' . (int) $this->params->get('radius') . '&' . $eventLevel . '&bFilter=Filter' . $dateFilter;
 		$curlResponse = $this->curl($url);
 		$curlErrorMsg = $curlResponse['status'];
 		$scraped_page = $curlResponse['data'];
@@ -75,22 +73,22 @@ class OEventsUpdater  {
 
 		// Sometimes there is this in the evt_name div: <span class="closing_soon">Closing date approaching</span>
 		$titleTemp = preg_split("/<span.*?/", $this->scrape_between($separate_result, "<strong>", "</strong>"));
-		$result['title'] = html_entity_decode($titleTemp[0]);
+		$result['title'] = $this->toPlainText($titleTemp[0]);
 
 		$result['date'] = $this->scrape_between($separate_result, "</strong><strong>", "</strong>");
 		$result['remote_id'] = (int) $this->scrape_between($separate_result, "data-event-id=\"", "\"");
-		$result['venue'] = $this->scrape_between($separate_result, "target=\"_blank\"\">", "</a></div><div");
+		$result['venue'] = $this->toPlainText($this->scrape_between($separate_result, "target=\"_blank\"\">", "</a></div><div"));
 
 		$clubTemp = $this->scrape_between($separate_result, "<label>Club:</label>", "</a></div>");
-		$result['clubUrl'] = html_entity_decode($this->scrape_between($clubTemp, "href=\"", "\" target="));
+		$result['clubUrl'] = $this->toWebUrl(html_entity_decode($this->scrape_between($clubTemp, "href=\"", "\" target=")));
 		$clubNameTemp = preg_split("/<.*?>/", $clubTemp);
 		if (sizeof($clubNameTemp) == 2) {
-			$result['club'] = $clubNameTemp[1];
+			$result['club'] = $this->toPlainText($clubNameTemp[1]);
 		} else {
 			$result['club'] = '';
 		}
 
-		$result['level'] = str_replace('&nbsp;', '', $this->scrape_between($separate_result, "<label>Level:</label>", "</div>"));
+		$result['level'] = $this->toPlainText(str_replace('&nbsp;', '', $this->scrape_between($separate_result, "<label>Level:</label>", "</div>")));
 		$urlTemp = $this->scrape_between(
 			$this->scrape_between($separate_result, "<a class=\"btn btn-success\"", ">Full details</a>"),
 			"href=\"", "\""
@@ -98,6 +96,19 @@ class OEventsUpdater  {
 		$result['url'] = "https://www.britishorienteering.org.uk/" . $urlTemp;
 
 		return $result;
+	}
+
+	// Converts scraped HTML to plain text. Values are stored as plain text and escaped when output.
+	private function toPlainText($html) {
+		return trim(strip_tags(html_entity_decode((string) $html, ENT_QUOTES | ENT_HTML5, 'UTF-8')));
+	}
+
+	// Only keeps http(s) URLs, so that e.g. javascript: URLs are never stored
+	private function toWebUrl($url) {
+		$url = trim((string) $url);
+		$scheme = strtolower((string) parse_url($url, PHP_URL_SCHEME));
+
+		return in_array($scheme, ['http', 'https'], true) ? $url : '';
 	}
 
 	// Defining the basic cURL function
@@ -110,7 +121,9 @@ class OEventsUpdater  {
 			CURLOPT_CONNECTTIMEOUT => 120,      // Setting the amount of time (in seconds) before the request times out
 			CURLOPT_TIMEOUT => 120,             // Setting the maximum amount of time for cURL to execute queries
 			CURLOPT_MAXREDIRS => 10,            // Setting the maximum number of redirections to follow
-			CURLOPT_USERAGENT => 'OEventsBot/2.1.0 (+https://github.com/abradbury, +' . Uri::root() . ')',  // Setting the useragent
+			CURLOPT_PROTOCOLS => CURLPROTO_HTTPS,        // Only allow HTTPS requests
+			CURLOPT_REDIR_PROTOCOLS => CURLPROTO_HTTPS,  // Only follow redirects to HTTPS URLs
+			CURLOPT_USERAGENT => 'OEventsBot/2.6.1 (+https://github.com/abradbury, +' . Uri::root() . ')',  // Setting the useragent
 			CURLOPT_URL => $url,                // Setting cURL's URL option with the $url variable passed into the function
   		];
 			
@@ -138,16 +151,23 @@ class OEventsUpdater  {
 			$query = $db->getQuery(true);
 
 			$existingEventIDs = $this->getEventIds($db);
+			// The level names shown on the British Orienteering website. These must not be
+			// translated, as they are matched against the scraped (English) text.
 			$levelMapping = [
-				Text::_("COM_OEVENTS_EVENT_LEVEL_1") => '1', 
-				Text::_("COM_OEVENTS_EVENT_LEVEL_2") => '2', 
-				Text::_("COM_OEVENTS_EVENT_LEVEL_3") => '3', 
-				Text::_("COM_OEVENTS_EVENT_LEVEL_4") => '4', 
-				Text::_("COM_OEVENTS_EVENT_LEVEL_5") => '5'
+				'Major' => '1', 
+				'National' => '2', 
+				'Regional' => '3', 
+				'Local' => '4', 
+				'International' => '5'
 			];
 
 			foreach ($events as $event) {
-				$dateTime = \DateTime::createFromFormat('D jS M Y', $event['date'])->format("Y-m-d H:i:s");
+				$date = \DateTime::createFromFormat('D jS M Y', $event['date']);
+				if ($date === false) {
+					// Skip events whose date can't be parsed, e.g. if the remote page layout changes
+					continue;
+				}
+				$dateTime = $date->format("Y-m-d H:i:s");
 				
 				$level = "";
 				if (array_key_exists($event['level'], $levelMapping)) {

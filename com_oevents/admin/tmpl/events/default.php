@@ -3,7 +3,7 @@
  * @package     Joomla.Administrator
  * @subpackage  com_oevents
  */
- 
+
 namespace OEvents\Component\OEvents\Administrator\View\Events;
 
 use \Joomla\CMS\Router\Route;
@@ -14,25 +14,25 @@ use \Joomla\CMS\HTML\HTMLHelper;
 defined('_JEXEC') or die('Restricted Access');
 
 // Stringify the levels
-$array = $this->params->get('eventLevel');
-// FIXME: Array can be null on initial installations
+// The option is null on initial installations, until the options have been saved
+$array = (array) $this->params->get('eventLevel', []);
 $prettyArray = array_map(function ($event_level) {
 	// Not great that this mapping has to be in the function..
 	$levelMapping = [
-		'1' => 'COM_OEVENTS_EVENT_LEVEL_1', 
-		'2' => 'COM_OEVENTS_EVENT_LEVEL_2', 
-		'3' => 'COM_OEVENTS_EVENT_LEVEL_3', 
-		'4' => 'COM_OEVENTS_EVENT_LEVEL_4', 
+		'1' => 'COM_OEVENTS_EVENT_LEVEL_1',
+		'2' => 'COM_OEVENTS_EVENT_LEVEL_2',
+		'3' => 'COM_OEVENTS_EVENT_LEVEL_3',
+		'4' => 'COM_OEVENTS_EVENT_LEVEL_4',
 		'5' => 'COM_OEVENTS_EVENT_LEVEL_5'
 	];
 
-	return(Text::_($levelMapping[$event_level]));
+	return isset($levelMapping[$event_level]) ? Text::_($levelMapping[$event_level]) : '';
 }, $array);
 
 $last  = array_slice($prettyArray, -1);
 $first = join(', ', array_slice($prettyArray, 0, -1));
 $both  = array_filter(array_merge([$first], $last), 'strlen');
-$stringifiedList = join(' or ', $both); 
+$stringifiedList = join(' or ', $both);
 
 ?>
 
@@ -45,23 +45,23 @@ $stringifiedList = join(' or ', $both);
 				<tobdy>
 					<tr>
 						<th scope="row"><?php echo Text::_('COM_OEVENTS_CONFIG_FIELD_POSTCODE_LABEL'); ?></th>
-						<td><?php echo $this->params->get('postcode'); ?></td>
+						<td><?php echo $this->escape($this->params->get('postcode')); ?></td>
 					</tr>
 					<tr>
 						<th scope="row"><?php echo Text::_('COM_OEVENTS_CONFIG_FIELD_RADIUS_LABEL'); ?></th>
-						<td><?php echo $this->params->get('radius'); ?></td>
+						<td><?php echo $this->escape($this->params->get('radius')); ?></td>
 					</tr>
 					<tr>
 						<th scope="row"><?php echo Text::_('COM_OEVENTS_CONFIG_FIELD_LOOK_AHEAD_LABEL'); ?></th>
-						<td><?php echo $this->params->get('lookAhead'); ?></td>
+						<td><?php echo $this->escape($this->params->get('lookAhead')); ?></td>
 					</tr>
 					<tr>
 						<th scope="row"><?php echo Text::_('COM_OEVENTS_CONFIG_FIELD_EVENT_LEVELS_LABEL'); ?></th>
-						<td><?php echo $stringifiedList; ?></td>
+						<td><?php echo $this->escape($stringifiedList); ?></td>
 					</tr>
 				</tobdy>
 			</table>
-			<p class="card-text"><?php echo Text::_('COM_OEVENTS_CONFIG_SCHEDULER'); ?></p>
+			<p class="card-text"><?php echo Text::sprintf('COM_OEVENTS_CONFIG_SCHEDULER', Route::_('index.php?option=com_scheduler&view=tasks')); ?></p>
 		</div>
 	</div>
 	<div class="col">
@@ -88,29 +88,29 @@ $stringifiedList = join(' or ', $both);
 					</thead>
 					<tbody>
 						<?php if (!empty($this->items)) : ?>
-							<?php foreach ($this->items as $i => $row) : 
-								$editLink = Route::_('index.php?option=com_oevents&task=event.edit&event_id=' . $row->event_id); ?>
+							<?php foreach ($this->items as $i => $row) :
+								$editLink = Route::_('index.php?option=com_oevents&task=event.edit&event_id=' . (int) $row->event_id); ?>
 								<tr>
 									<td><?php echo HTMLHelper::_('grid.id', $i, $row->event_id); ?></td>
-									<td><?php echo $row->date; ?></td>
+									<td><?php echo $this->escape($row->date); ?></td>
 									<td><?php if ($this->canDo->get('core.edit')) : ?>
-										<a href="<?php echo $editLink; ?>" title="<?php echo Text::_('COM_OEVENTS_EDIT_EVENT'); ?>"><?php echo $row->title; ?></a>
+										<a href="<?php echo $editLink; ?>" title="<?php echo Text::_('COM_OEVENTS_EDIT_EVENT'); ?>"><?php echo $this->escape($row->title); ?></a>
 									<?php else : ?>
-										<?php echo $row->title; ?>
+										<?php echo $this->escape($row->title); ?>
 									<?php endif; ?></td>
-									<td><?php echo $row->venue; ?></td>
-									<td><?php if (!empty($row->level)) { 
-										echo Text::_("COM_OEVENTS_EVENT_LEVEL_" . $row->level);
+									<td><?php echo $this->escape($row->venue); ?></td>
+									<td><?php if (!empty($row->level)) {
+										echo $this->escape(Text::_('COM_OEVENTS_EVENT_LEVEL_' . (int) $row->level));
 									 } ?></td>
-									<td><?php echo $row->club; ?></td>
+									<td><?php echo $this->escape($row->club); ?></td>
 									<td><?php if ($row->status == 1) {
-										echo "AUTO";
+										echo Text::_('COM_OEVENTS_STATUS_AUTO');
 									} elseif ($row->status == 0) {
-										echo "MANUAL";
+										echo Text::_('COM_OEVENTS_STATUS_MANUAL');
 									} elseif ($row->status == 2) {
-										echo "OVERIDDEN";
+										echo Text::_('COM_OEVENTS_STATUS_OVERRIDDEN');
 									} else {
-										echo "UNKNOWN";
+										echo Text::_('COM_OEVENTS_STATUS_UNKNOWN');
 									} ?></td>
 								</tr>
 							<?php endforeach; ?>
